@@ -2,6 +2,8 @@
 
 one:
   user: one
+  subscriber: one
 
 two:
   user: two
+  subscriber: two
