@@ -13,7 +13,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[8.0]
 
       ## Rememberable
       t.datetime :remember_created_at
-      t.user_name :name, null: false
+      t.string :user_name, null: false
+      t.string :phone_number, default: nil
 
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false
