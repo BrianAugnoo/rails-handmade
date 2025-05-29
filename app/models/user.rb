@@ -12,8 +12,7 @@ class User < ApplicationRecord
   has_many :subscribers, dependent: :destroy
   has_many :conversations, dependent: :destroy
   has_many :messages, dependent: :destroy
-  has_one :subscription, dependent: :destroy
-  has_one :chat, dependent: :destroy
+  has_many :subscritpions, dependent: :destroy
 
   validates :user_name, presence: true, uniqueness: true
   validates :password, format: { with: /\A(?=.*[A-Z])(?=.*\d).+\z/, message: "the password must contain a capital letter and a number" }
