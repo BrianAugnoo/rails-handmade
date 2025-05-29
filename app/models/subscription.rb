@@ -1,4 +1,4 @@
 class Subscription < ApplicationRecord
-  belongs_to :user
-  belongs_to :subscriber, classname: "User", foreign_key: "subscriber_id"
+  belongs_to :subscriber
+  belongs_to :subscribed
 end
