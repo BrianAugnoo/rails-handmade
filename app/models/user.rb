@@ -9,17 +9,16 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :notifications, dependent: :destroy
-  has_many :subscribers, dependent: :destroy
-  has_many :conversations, dependent: :destroy
+  has_many :subscribers, class_name: "Subscriber", foreign_key: "subscriber_id", dependent: :destroy
+  has_many :subscribeds, class_name: "Subscriber", foreign_key: "subscribed_id", dependent: :destroy
+  has_many :recipients, class_name: "Conversation", foreign_key: "recipient_id", dependent: :destroy
+  has_many :senders, class_name: "Conversation", foreign_key: "sender_id", dependent: :destroy
   has_many :messages, dependent: :destroy
-  has_many :subscritpions, dependent: :destroy
 
   validates :user_name, presence: true, uniqueness: true
   validates :password, format: { with: /\A(?=.*[A-Z])(?=.*\d).+\z/, message: "the password must contain a capital letter and a number" }
   validate :valid_phone_number
   validates :phone_number, uniqueness: true, if: :valid_phone_number
-  after_create :create_subscription
-  after_create :create_chat
 
   private
 
@@ -29,13 +28,5 @@ class User < ApplicationRecord
     elsif !phone_number.nil?
       true
     end
-  end
-
-  def create_subscription
-    Subscription.create!(user_id: self.id)
-  end
-
-  def create_chat
-    Chat.create!(user_id: self.id)
   end
 end
