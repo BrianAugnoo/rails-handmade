@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_29_192938) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_30_145524) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -38,6 +38,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_29_192938) do
     t.bigint "sender_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["recipient_id", "sender_id"], name: "index_conversations_on_recipient_id_and_sender_id", unique: true
     t.index ["recipient_id"], name: "index_conversations_on_recipient_id"
     t.index ["sender_id"], name: "index_conversations_on_sender_id"
   end
@@ -56,7 +57,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_29_192938) do
     t.bigint "conversation_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.boolean "read", default: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["created_at"], name: "index_messages_on_created_at"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -99,6 +104,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_29_192938) do
   add_foreign_key "likes", "arts"
   add_foreign_key "likes", "users"
   add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users"
   add_foreign_key "notifications", "users"
   add_foreign_key "subscriptions", "users", column: "subscribed_id"
   add_foreign_key "subscriptions", "users", column: "subscriber_id"

@@ -2,15 +2,12 @@ require 'faker'
 
 puts "cleaning database..."
 User.destroy_all
-puts "users destroyed"
 Art.destroy_all
-puts "arts destroyed"
 Comment.destroy_all
-puts "comments destroyed"
 Like.destroy_all
-puts "likes destroyed"
 Notification.destroy_all
-puts "notifications destroyed"
+Message.destroy_all
+
 
 puts "creating users..."
 artist = User.create!(user_name: "artist", password: ENV["USER_PASSWORD"], password_confirmation: ENV["USER_PASSWORD"], email: "artist@exemple.com", phone_number: "+33612345679")
@@ -38,12 +35,24 @@ puts "creating notifications..."
   Notification.create!(user: User.all.sample, content: Faker::Lorem.sentence)
 end
 
-puts "create suscribers..."
-10.times do
-  Subscriber.create!(user: User.where.not(id: artist.id).sample, subscription: artist.subscription)
+puts "creating subscriptions..."
+User.where.not(id: artist.id).each do |user|
+  Subscription.create!(subscriber: artist, subscribed: user)
 end
 
-# puts "create conversations..."
-# 10.times do
-#   Conversation.create!(user: User.all.sample, chat: artist.chat)
-# end
+puts "creating conversations..."
+User.where.not(id: artist.id).each do |user|
+  if !Conversation.between?(artist, user)
+    Conversation.create!(recipient: artist, sender: user)
+  end
+end
+
+puts "creating messages..."
+10.times do
+  Message.create_in_conversation(content: Faker::Lorem.sentence, user: User.all.sample, recipient: User.all.sample)
+end
+Conversation.all.each do |conversation|
+  Message.create!(content: Faker::Lorem.sentence, user: conversation.recipient, conversation: conversation)
+end
+
+puts "seeding done!"
