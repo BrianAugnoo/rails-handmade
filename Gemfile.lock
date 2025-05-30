@@ -109,12 +109,17 @@ GEM
       responders
       warden (~> 1.2.3)
     dotenv (3.1.8)
+    dotenv-rails (3.1.8)
+      dotenv (= 3.1.8)
+      railties (>= 6.1)
     drb (2.2.3)
     ed25519 (1.4.0)
     erb (5.0.1)
     erubi (1.13.1)
     et-orbi (1.2.11)
       tzinfo
+    faker (3.5.1)
+      i18n (>= 1.8.11, < 2)
     fugit (1.11.1)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
@@ -189,6 +194,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.18.8-x86_64-linux-musl)
       racc (~> 1.4)
+    obscenity (1.0.2)
     orm_adapter (0.5.0)
     ostruct (0.6.1)
     parallel (1.27.0)
@@ -196,6 +202,7 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.9)
+    phony (2.22.2)
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
@@ -372,10 +379,14 @@ DEPENDENCIES
   capybara
   debug
   devise
+  dotenv-rails
+  faker
   importmap-rails
   jbuilder
   kamal
+  obscenity
   pg (~> 1.1)
+  phony
   propshaft
   puma (>= 5.0)
   rails (~> 8.0.2)
