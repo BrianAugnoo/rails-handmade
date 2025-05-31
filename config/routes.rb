@@ -1,18 +1,4 @@
 Rails.application.routes.draw do
-  get "chatrooms/show"
-  get "notifications/index"
-  get "search/index"
-  get "search/results"
-  get "subscriptions/create"
-  get "subscriptions/destroy"
-  get "comments/create"
-  get "likes/create"
-  get "art/index"
-  get "art/new"
-  get "art/create"
-  get "art/show"
-  get "pages/home"
-  get "home/index"
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
