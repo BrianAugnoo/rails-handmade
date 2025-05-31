@@ -11,4 +11,7 @@ Rails.application.routes.draw do
 
   resources :notifications, only: [ :index, :destroy ]
   resources :search, only: [ :index ]
+  resources :conversations, only: [ :index, :show ] do
+    resources :messages, only: [ :create ]
+  end
 end

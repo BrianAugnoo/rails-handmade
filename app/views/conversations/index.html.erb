@@ -1,0 +1,6 @@
+<% @conversations.each do |conversation| %>
+  <div class="conversation">
+    <% interlocutor = conversation.interlocutor(current_user) %>
+    <h3><%= link_to interlocutor.user_name, conversation_path(conversation), class: "btn btn-primary" %></h3>
+  </div>
+<% end %>
