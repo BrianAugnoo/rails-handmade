@@ -47,9 +47,4 @@ User.where.not(id: artist.id).each do |user|
   end
 end
 
-puts "creating messages..."
-Conversation.all.each do |conversation|
-  Message.create!(content: Faker::Lorem.sentence, user: conversation.recipient, conversation: conversation)
-end
-
 puts "seeding done!"
