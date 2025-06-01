@@ -35,6 +35,8 @@ gem "faker"
 gem "phony"
 gem "dotenv-rails"
 gem "obscenity"
+gem 'bootstrap', '~> 5.3.3'
+gem 'jquery-rails'
 
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -70,3 +72,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "cssbundling-rails", "~> 1.4"
+
+gem "dartsass-rails", "~> 0.5.1"
