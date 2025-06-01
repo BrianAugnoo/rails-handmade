@@ -1,0 +1,17 @@
+<%= render "conversation_navbar" %>
+
+<div class="container d-flex flex-column min-vh-100 mt-5">
+  <div class="flex-grow-1 w-100">
+    <%= turbo_stream_from "conversation_#{@conversation.id}_#{current_user.id}" %>
+    <div id="messages" class="messages d-flex w-100 flex-column">
+      <% @conversation.messages.each do |message| %>
+        <% position = current_user == message.user ? "ms-auto" : "" %>
+        <%= render "message", message: message, position: position %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="position-fixed bottom-0 start-0 end-0 bg-white p-3">
+    <%= render "message_input" %>
+  </div>
+</div>

@@ -25,6 +25,14 @@ class Conversation < ApplicationRecord
     self.messages.order(created_at: :asc)
   end
 
+  def interlocutor(user)
+    if user == self.recipient
+      self.sender
+    elsif user == self.sender
+      self.recipient
+    end
+  end
+
   private
   # Ensures that the sender and recipient IDs are always stored in a consistent order
   def unique_combination

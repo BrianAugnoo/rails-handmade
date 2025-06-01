@@ -11,4 +11,7 @@ Rails.application.routes.draw do
 
   resources :notifications, only: [ :index, :destroy ]
   resources :search, only: [ :index ]
+  resources :conversations, only: [ :index, :show ]
+
+  post ":user_id/message" => "messages#create", as: :create_message
 end
