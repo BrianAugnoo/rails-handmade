@@ -1,5 +1,5 @@
 class Message < ApplicationRecord
-  attr_accessor :current_user
+  attr_accessor :recipient
   belongs_to :conversation
   belongs_to :user
   after_create_commit :broadcast_create
@@ -22,9 +22,14 @@ class Message < ApplicationRecord
 
   private
   def broadcast_create
-    broadcast_append_to "conversation_#{self.conversation.id}",
+    broadcast_append_to "conversation_#{self.conversation.id}_#{self.user.id}",
                          target: "messages",
                          partial: "conversations/message",
-                         locals: { message: self, position: (self.user == self.current_user ? "ms-auto" : "") }
+                         locals: { message: self, position: "ms-auto" }
+
+    broadcast_append_to "conversation_#{self.conversation.id}_#{self.recipient.id}",
+                         target: "messages",
+                         partial: "conversations/message",
+                         locals: { message: self, position: "" }
   end
 end

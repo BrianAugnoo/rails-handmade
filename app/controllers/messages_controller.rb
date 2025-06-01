@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(set_params)
     recipient = User.find(params[:user_id])
-    @message.current_user = current_user
+    @message.recipient = recipient
     if @message.save_in_conversation(recipient: recipient, user: current_user)
       respond_to do |format|
         format.turbo_stream do
