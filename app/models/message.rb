@@ -2,7 +2,7 @@ class Message < ApplicationRecord
   attr_accessor :recipient
   belongs_to :conversation
   belongs_to :user
-  after_create_commit :broadcast_create
+  after_create_commit :broadcast_create, if: self.recipient.present?
 
   # always use this method to create a message in controller
   def save_in_conversation(params)
