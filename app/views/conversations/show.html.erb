@@ -2,6 +2,7 @@
 
 <div class="container d-flex flex-column min-vh-100 mt-5">
   <div class="flex-grow-1 w-100">
+    <%= turbo_stream_from "conversation_#{@conversation.id}" %>
     <div id="messages" class="messages d-flex w-100 flex-column">
       <% @conversation.messages.each do |message| %>
         <% position = current_user == message.user ? "ms-auto" : "" %>
