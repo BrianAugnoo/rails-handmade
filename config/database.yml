@@ -79,7 +79,7 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  primary: 
+  primary:
     adapter: postgresql
     url: <%= ENV['DATABASE_URL'] %>
 
@@ -90,6 +90,7 @@ production:
   cache:
     adapter: postgresql
     url: <%= ENV['DATABASE_URL'] %>
+
   cable:
-    database: app_production_cable
-    migrations_paths: db/cable_migrate
+    adapter: postgresql
+    url: <%= ENV['DATABASE_URL'] %>
