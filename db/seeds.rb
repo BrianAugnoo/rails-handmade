@@ -48,9 +48,6 @@ User.where.not(id: artist.id).each do |user|
 end
 
 puts "creating messages..."
-10.times do
-  Message.create_in_conversation(content: Faker::Lorem.sentence, user: User.all.sample, recipient: User.all.sample)
-end
 Conversation.all.each do |conversation|
   Message.create!(content: Faker::Lorem.sentence, user: conversation.recipient, conversation: conversation)
 end
