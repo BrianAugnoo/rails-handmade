@@ -5,6 +5,7 @@ class MessagesController < ApplicationController
     recipient = User.find(params[:user_id])
     @message.recipient = recipient
     if @message.save_in_conversation(recipient: recipient, user: current_user)
+      create_notification(user: current_user, content: @message.content, recipient: recipient)
       respond_to do |format|
         format.turbo_stream do
           position = @message.user == current_user ? "ms-auto" : ""
@@ -20,5 +21,11 @@ class MessagesController < ApplicationController
   private
   def set_params
     params.require(:message).permit(:content)
+  end
+
+  def create_notification(notification_params)
+    notification_params[:content] = "#{notification_params[:recipient].user_name} sent you a message: #{notification_params[:content]}"
+    notification = Notification.new(content: notification_params[:content])
+    notification.message_notification(notification_params)
   end
 end
