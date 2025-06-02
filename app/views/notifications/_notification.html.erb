@@ -1,0 +1,13 @@
+<div id="notification_<%= notification.id %>" class="notification <%= notification.read? ? 'read' : 'unread' %>">
+  <div class="notification-header">
+    <span class="notification-date"><%= notification.created_at.strftime("%B %d, %Y") %></span>
+  </div>
+  <div class="notification-body">
+    <p><%= notification.content %></p>
+  </div>
+  <div class="notification-actions">
+    <%= link_to 'Mark as Read', "#", method: :post, class: 'btn btn-primary' unless notification.read? %>
+    <%= link_to 'Delete', notification_path(notification), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+  </div>
+
+</div>
