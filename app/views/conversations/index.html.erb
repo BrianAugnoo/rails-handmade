@@ -1,8 +1,19 @@
-<div class="container">
+<div class="chat-search-bar">
+  <input type="text" id="chat-search-input" placeholder="Search chats..." onkeyup="filterChats()" />
+</div>
+
+<div class="chat-list-container">
   <% @conversations.each do |conversation| %>
-    <div class="conversation">
-      <% interlocutor = conversation.interlocutor(current_user) %>
-      <h3><%= link_to interlocutor.user_name, conversation_path(conversation), class: "link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" %></h3>
-    </div>
+    <% interlocutor = conversation.interlocutor(current_user) %>
+    <%= link_to conversation_path(conversation), class: "chat-item" do %>
+      <div class="chat-avatar">
+        <img class="avatar-img" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
+      </div>
+      <div class="chat-info">
+        <div class="chat-name"><%= interlocutor.user_name %></div>
+        <!-- You can add last message preview or timestamp here if available -->
+        <!-- <div class="chat-preview">Last message preview...</div> -->
+      </div>
+    <% end %>
   <% end %>
 </div>
