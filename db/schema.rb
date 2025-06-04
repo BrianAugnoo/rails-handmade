@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_30_174547) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_04_162608) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+  enable_extension "vector"
 
   create_table "arts", force: :cascade do |t|
     t.text "description"
@@ -20,6 +21,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_30_174547) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.vector "embedding", limit: 1536
     t.index ["user_id"], name: "index_arts_on_user_id"
   end
 

@@ -37,8 +37,8 @@ gem "dotenv-rails"
 gem "obscenity"
 gem 'bootstrap', '~> 5.3.3'
 gem 'jquery-rails'
-
-
+gem "pgvector", "~> 0.2"
+gem "neighbor"
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
