@@ -39,6 +39,8 @@ gem 'bootstrap', '~> 5.3.3'
 gem 'jquery-rails'
 gem "pgvector", "~> 0.2"
 gem "neighbor"
+gem 'ruby-openai'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
