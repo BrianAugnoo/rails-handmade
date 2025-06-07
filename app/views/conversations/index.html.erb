@@ -1,19 +1,40 @@
-<div class="chat-search-bar">
-  <input type="text" id="chat-search-input" placeholder="Search chats..." onkeyup="filterChats()" />
-</div>
+<nav class="navbar bg-body-tertiary w-100">
+  <div class="container-fluid px-4">
+    <input id="chat-search" class="form-control me-2 w-100" type="search" placeholder="Search conversations..." aria-label="Search" />
+  </div>
+</nav>
 
 <div class="chat-list-container">
   <% @conversations.each do |conversation| %>
     <% interlocutor = conversation.interlocutor(current_user) %>
-    <%= link_to conversation_path(conversation), class: "chat-item" do %>
-      <div class="chat-avatar">
-        <img class="avatar-img" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
-      </div>
-      <div class="chat-info">
-        <div class="chat-name"><%= interlocutor.user_name %></div>
-        <!-- You can add last message preview or timestamp here if available -->
-        <!-- <div class="chat-preview">Last message preview...</div> -->
-      </div>
-    <% end %>
+    <div class="chat-item-wrapper" data-name="<%= interlocutor.user_name.downcase %>">
+      <%= link_to conversation_path(conversation), class: "chat-item" do %>
+        <div class="chat-avatar">
+          <img class="avatar-img" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
+        </div>
+        <div class="chat-info">
+          <div class="chat-name"><%= interlocutor.user_name %></div>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("chat-search");
+    const searchButton = document.getElementById("search-button");
+    const chatItems = document.querySelectorAll(".chat-item-wrapper");
+
+    function filterChats() {
+      const query = searchInput.value.toLowerCase();
+      chatItems.forEach(item => {
+        const name = item.getAttribute("data-name");
+        item.style.display = name.includes(query) ? "block" : "none";
+      });
+    }
+
+    searchInput.addEventListener("input", filterChats);
+    searchButton.addEventListener("click", filterChats);
+  });
+</script>

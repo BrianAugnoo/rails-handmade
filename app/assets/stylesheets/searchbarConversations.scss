@@ -1,3 +1,12 @@
+.full-page-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+}
+
 .chat-search-bar {
   padding: 12px 16px;
   border-bottom: 1px solid #e0e0e0;
@@ -14,6 +23,4 @@
   transition: border 0.2s;
 }
 
-#chat-search-input:focus {
-  border-color: #4CAF50;
-}
+
