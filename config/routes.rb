@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   end
 
   resources :notifications, only: [ :index, :destroy ]
-  resources :search, only: [ :index ]
+
+  get "searchUser" => "search#search_user", as: :search_user
+  
   resources :conversations, only: [ :index, :show ]
 
   post ":user_id/message" => "messages#create", as: :create_message
