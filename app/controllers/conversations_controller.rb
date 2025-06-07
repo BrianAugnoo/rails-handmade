@@ -3,6 +3,12 @@ class ConversationsController < ApplicationController
 
   def index
     @conversations = current_user.conversations
+
+    if params[:query].present?
+      @conversations = @conversations.select do |conversation|
+        conversation.interlocutor(current_user).user_name.downcase.include?(params[:query].downcase)
+      end
+    end
   end
 
   def show
