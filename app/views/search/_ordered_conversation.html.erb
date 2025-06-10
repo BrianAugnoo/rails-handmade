@@ -1,0 +1,13 @@
+<div class="chat-list-container" id="search-conversation">
+  <% conversations.each do |conversation| %>
+    <% interlocutor = conversation.interlocutor(current_user) %>
+    <%= link_to conversation_path(conversation), class: "chat-item", hiden: true do %>
+      <div class="chat-avatar">
+        <img class="avatar-img" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
+      </div>
+      <div class="chat-info">
+        <div class="chat-name"><%= interlocutor.user_name %></div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

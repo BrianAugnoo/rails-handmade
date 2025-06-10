@@ -1,0 +1,17 @@
+<div id="user_search">
+  <div class="d-flex">
+    <p>more account</p>
+    <%= link_to "more account", "#", class: "link-underline-opacity-0 link-light" %>
+  </div>
+
+  <% users.each do |user| %>
+    <%= link_to conversation_path(conversation), class: "chat-item", hiden: true do %>
+      <div class="chat-avatar">
+        <img class="avatar-img" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
+      </div>
+      <div class="chat-info">
+        <div class="chat-name"><%= user.user_name %></div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
