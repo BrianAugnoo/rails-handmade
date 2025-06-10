@@ -8,19 +8,11 @@
   <div id="search-conversation"></div>
   <div id="search-user"></div>
 
-  <div class="chat-list-container"  data-search-target="chatList">
+  <%= turbo_stream_from "user#{current_user.id}_conversations" %>
+  <div class="chat-list-container"  data-search-target="chatList" id="conversations">
     <% @conversations.each do |conversation| %>
       <% interlocutor = conversation.interlocutor(current_user) %>
-      <%= link_to conversation_path(conversation), class: "chat-item" do %>
-        <div class="chat-avatar">
-          <img class="avatar-img" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
-        </div>
-        <div class="chat-info">
-          <div class="chat-name"><%= interlocutor.user_name %></div>
-          <!-- You can add last message preview or timestamp here if available -->
-          <!-- <div class="chat-preview">Last message preview...</div> -->
-        </div>
-      <% end %>
+      <%= render "conversation", conversation: conversation, interlocutor: interlocutor %>
     <% end %>
   </div>
 </div>
