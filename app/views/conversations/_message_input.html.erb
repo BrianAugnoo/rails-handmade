@@ -1,5 +1,5 @@
 <div class="message-input">
-  <%= form_with model: @message, url: create_message_path(@interlocutor), data: {turbo_stream: true, controller: "reset-input", action: "turbo:submit-end->reset-input#clear"}  do |form| %>
+  <%= form_with model: @message, url: create_message_path(@interlocutor), data: {turbo: use_turbo,turbo_stream: use_turbo, controller: "reset-input", action: "turbo:submit-end->reset-input#clear"}  do |form| %>
     <div class="form-group">
       <%= form.label :content, "Type your message:" %>
       <%= form.text_area :content, rows: 3, class: "form-control", placeholder: "Write your message here...", required: true, data: {"reset-input-target": "input"}%>

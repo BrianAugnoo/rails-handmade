@@ -11,6 +11,11 @@ class ConversationsController < ApplicationController
     @interlocutor = @conversation.interlocutor(current_user)
   end
 
+  def new
+    @interlocutor = User.find(params[:recipient_id])
+    @message = Message.new
+  end
+
   private
   def find_conversation
     @conversation = Conversation.find(params[:id])
