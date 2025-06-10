@@ -40,13 +40,13 @@ class Conversation < ApplicationRecord
   end
 
   def broadcast_create
-    broadcast_prepend_to "conversations",
-                          target: "user#{self.sender.id}_conversations",
+    broadcast_prepend_to "user#{self.sender.id}_conversations",
+                          target: "conversations",
                           partial: "conversations/conversation",
                           locals: { conversation: self, interlocutor: self.recipient }
 
-    broadcast_prepend_to "conversations",
-                          target: "user#{self.recipient.id}_conversations",
+    broadcast_prepend_to "user#{self.recipient.id}_conversations",
+                          target: "conversations",
                           partial: "conversations/conversation",
                           locals: { conversation: self, interlocutor: self.recipient }
   end
