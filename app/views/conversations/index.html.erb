@@ -1,19 +1,18 @@
-<div class="chat-search-bar">
-  <input type="text" id="chat-search-input" placeholder="Search chats..." onkeyup="filterChats()" />
-</div>
-
-<div class="chat-list-container">
-  <% @conversations.each do |conversation| %>
-    <% interlocutor = conversation.interlocutor(current_user) %>
-    <%= link_to conversation_path(conversation), class: "chat-item" do %>
-      <div class="chat-avatar">
-        <img class="avatar-img" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
-      </div>
-      <div class="chat-info">
-        <div class="chat-name"><%= interlocutor.user_name %></div>
-        <!-- You can add last message preview or timestamp here if available -->
-        <!-- <div class="chat-preview">Last message preview...</div> -->
-      </div>
+<div data-controller="search">
+  <div class="chat-search-bar">
+    <%= form_with url: search_user_path, method: :get, data: { turbo_stream: true, "search-target": "form" } do |f| %>
+      <%= f.text_field :query , id: "chat-search-input", data: {"search-target": "input", action: "keyup->search#searchUser"} %>
     <% end %>
-  <% end %>
+  </div>
+
+  <div id="search-conversation"></div>
+  <div id="search-user"></div>
+
+  <%= turbo_stream_from "user#{current_user.id}_conversations" %>
+  <div class="chat-list-container"  data-search-target="chatList" id="conversations">
+    <% @conversations.each do |conversation| %>
+      <% interlocutor = conversation.interlocutor(current_user) %>
+      <%= render "conversation", conversation: conversation, interlocutor: interlocutor %>
+    <% end %>
+  </div>
 </div>
