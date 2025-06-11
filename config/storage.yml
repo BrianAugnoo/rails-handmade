@@ -8,4 +8,4 @@ local:
 
 cloudinary:
   service: Cloudinary
-  folder: <%= Rails.env %>
+  folder: <%= ENV['CLOUDINARY_URL'] %>
