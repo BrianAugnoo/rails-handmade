@@ -1,1 +1,17 @@
-<%= button_to "log out",  destroy_user_session_path, method: :destroy %>
+<%= button_to "log out",  destroy_user_session_path, method: :destroy, data: {confirm: "are you sure"} %>
+<%= link_to "publish", new_art_path(Art.new), class: "btn btn-primary" %>
+<% @arts.each do |art| %>
+  <div class="art-item">
+    <h2><%= art.tags %></h2>
+    <p>trust: <%= art.trust %>%</p>
+    <p><%= art.description %></p>
+    <p>Created by: <%= art.user.user_name %></p>
+    <p>Created at: <%= art.created_at.strftime("%B %d, %Y") %></p>
+    <% if art.photo.attached? %>
+      <%= cl_image_tag art.photo.key, height: 300, width: 300 %>
+    <% end %>
+    <% if art.video.attached? %>
+      <%= cl_video_tag art.video.key, controls: true, width: 640, crop: :fill, quality: "auto" %>
+    <% end %>
+  </div>
+<% end %>
