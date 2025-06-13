@@ -14,6 +14,7 @@ class ArtController < ApplicationController
         flash[:alert] = "AI-generated content detected with a confidence of #{@ia_verification[:ai_confidence]}%. Please upload original content."
         render :new
       else
+        @art.trust = 100.00 - @ia_verification[:ai_confidence]
         if @art.save
           flash[:notice] = "Art created successfully! \n AI detection: #{@ia_verification[:ai_confidence]}% confidence."
           redirect_to root_path
