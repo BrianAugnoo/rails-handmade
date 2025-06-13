@@ -38,6 +38,7 @@ gem "obscenity"
 gem 'bootstrap', '~> 5.3.3'
 gem 'jquery-rails'
 gem "cloudinary"
+gem "httparty"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false

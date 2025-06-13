@@ -6,5 +6,8 @@
     <p><%= art.description %></p>
     <p>Created by: <%= art.user.user_name %></p>
     <p>Created at: <%= art.created_at.strftime("%B %d, %Y") %></p>
+    <% if art.photo.attached? %>
+      <%= cl_image_tag art.photo.key, height: 300, width: 300 %>
+    <% end %>
   </div>
 <% end %>
