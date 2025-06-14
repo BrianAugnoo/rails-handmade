@@ -1,0 +1,29 @@
+<nav class="bg-white border-b border-gray-200 shadow-sm px-6 py-4 flex items-center justify-between">
+  <div class="flex items-center space-x-4">
+    <%= image_tag @current_user.profile_picture_url, alt: "Profile", class: "w-12 h-12 rounded-full object-cover" %>
+
+    <div>
+      <p class="font-semibold text-gray-800"><%= @current_user.user_name %></p>
+      <div class="text-sm text-gray-600">
+        <span><%= @artwork_count %> artworks</span> ·
+        <span><%= @subscriber_count %> subscribers</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex items-center space-x-4 relative">
+    <%= link_to "Edit Profile", edit_user_registration_path, class: "bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium py-2 px-4 rounded-xl" %>
+
+    <!-- Menu Button -->
+    <button id="menu-toggle" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 focus:outline-none">
+      <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M5 6h14M5 18h14"/>
+      </svg>
+    </button>
+
+    <!-- Dropdown Menu -->
+    <div id="menu-dropdown" class="hidden absolute right-0 top-full mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+      <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+    </div>
+  </div>
+</nav>

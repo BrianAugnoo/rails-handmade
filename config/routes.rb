@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   resources :conversations, only: [ :index, :show, :new, :create ]
 
   post ":user_id/message" => "messages#create", as: :create_message
+
+  resource :profile, only: [ :show ]
 end
