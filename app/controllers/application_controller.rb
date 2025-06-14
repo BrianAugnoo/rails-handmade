@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_navbar_data
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [ :user_name ])
@@ -16,5 +17,11 @@ class ApplicationController < ActionController::Base
     @current_user = current_user
     @artwork_count = current_user.arts.count
     @subscriber_count = current_user.subscribers.count # Adjust based on your model
+  end
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:account_update, keys: [:profile_image])
   end
 end

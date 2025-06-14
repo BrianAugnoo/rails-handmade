@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :conversation_as_recipients, class_name: "Conversation", foreign_key: "recipient_id", dependent: :destroy
   has_many :conversation_as_senders, class_name: "Conversation", foreign_key: "sender_id", dependent: :destroy
   has_many :messages, dependent: :destroy
+  has_one_attached :profile_image
 
   validates :user_name, presence: true, uniqueness: true
   validates :password, format: { with: /\A(?=.*[A-Z])(?=.*\d).+\z/, message: "the password must contain a capital letter and a number" }
