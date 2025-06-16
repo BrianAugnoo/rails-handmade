@@ -22,7 +22,10 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body data-controller="session" data-session-target="body" online="false">
+    <% if user_signed_in? %>
+      <%= button_to "", online_session_path, method: :post, data: { turbo: :true, "session-target": "online"}, hidden: true %>
+    <% end %>
     <% flash.each do |key, value| %>
       <div class="alert alert-<%= key == "notice" ? "success" : "danger" %>">
         <%= value %>

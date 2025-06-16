@@ -1,5 +1,5 @@
 <%= link_to conversation_path(conversation), class: "chat-item" do %>
-  <div class="chat-avatar">
+  <div class="chat-avatar" id="conversation-<%= interlocutor.id %>">
     <img class="avatar-img" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
   </div>
   <div class="chat-info">

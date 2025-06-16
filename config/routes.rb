@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   get "user_index" => "search#user_index", as: :user_index
 
   resources :conversations, only: [ :index, :show, :new, :create ]
+  
+  post "session/online" => "session#online", as: :online_session
+  post "session/offline" => "session#offline", as: :offline_session
 
   post ":user_id/message" => "messages#create", as: :create_message
 end

@@ -5,6 +5,7 @@
     <% end %>
   </div>
 
+  <%= turbo_stream_from "conversations-icons" %>
   <div id="search-conversation"></div>
   <div id="search-user"></div>
 
@@ -13,7 +14,6 @@
     <% @conversations.each do |conversation| %>
       <% interlocutor = conversation.interlocutor(current_user) %>
       <%= render "conversation", conversation: conversation, interlocutor: interlocutor %>
-      <div style="width:12px; height:12px; background-color:green; border-radius:50%; display:inline-block;"></div>
     <% end %>
   </div>
 </div>

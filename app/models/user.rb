@@ -24,6 +24,13 @@ class User < ApplicationRecord
     Conversation.where("recipient_id = ? OR sender_id = ?", self.id, self.id)
   end
 
+  def online
+    broadcast_append_to "conversations-icons",
+                          target: "conversation-#{self.id}",
+                          partial: "session/online_icon",
+                          locals: { user: self }
+  end
+
   private
 
   def valid_phone_number
