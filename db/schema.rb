@@ -48,7 +48,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_17_125805) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.float "trust", null: false
+    t.float "trust", default: 0.0, null: false
     t.index ["user_id"], name: "index_arts_on_user_id"
   end
 
@@ -88,7 +88,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_17_125805) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.boolean "read", default: false
-    t.boolean "viewed", default: false, null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["created_at"], name: "index_messages_on_created_at"
     t.index ["user_id"], name: "index_messages_on_user_id"
