@@ -1,0 +1,24 @@
+<!-- Mobile Footer Navbar -->
+<nav class="navbar navbar-light bg-light fixed-bottom border-top">
+  <div class="container-fluid justify-content-around">
+    <%= link_to root_path, class: "nav-link text-center" do %>
+      <i class="bi bi-house"></i><br>
+      <small>Home</small>
+    <% end %>
+
+    <%= link_to "#", class: "nav-link text-center" do %>
+      <i class="bi bi-search"></i><br>
+      <small>Search</small>
+    <% end %>
+
+    <%= link_to new_art_path, class: "nav-link text-center" do %>
+      <i class="bi bi-plus-square"></i><br>
+      <small>Upload</small>
+    <% end %>
+
+    <%= link_to profile_path(current_user), class: "nav-link text-center" do %>
+      <i class="bi bi-person"></i><br>
+      <small>Profile</small>
+    <% end %>
+  </div>
+</nav>
