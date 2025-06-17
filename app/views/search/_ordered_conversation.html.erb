@@ -2,9 +2,7 @@
   <% conversations.each do |conversation| %>
     <% interlocutor = conversation.interlocutor(current_user) %>
     <%= link_to conversation_path(conversation), class: "chat-item", hiden: true do %>
-      <div class="chat-avatar">
-        <img class="avatar-img" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
-      </div>
+      <%= render "conversations/chat_avatar", interlocutor: interlocutor %>
       <div class="chat-info">
         <div class="chat-name"><%= interlocutor.user_name %></div>
       </div>
