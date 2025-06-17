@@ -23,51 +23,7 @@
   </head>
 
   <body>
+    <%= render "partial/navbarheader" %>
     <%= yield %>
-
-  <%# NavBar %>
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Handmade</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
-
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Handmade</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu"
-          aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse justify-content-end" id="navbarMenu">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <%= link_to 'Notifications', notifications_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'Messages', conversations_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "nav-link" %>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-    <%= yield %>
-  </body>
-</html>
-<%# End of NavBar %>
-
-
-
   </body>
 </html>
