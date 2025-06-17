@@ -10,9 +10,7 @@
   <% users.each do |user| %>
     <% if iteration < 3 || no_limit == true %>
       <%= link_to new_conversation_path(conversation, recipient_id: user), class: "chat-item", hiden: true do %>
-        <div class="chat-avatar" id="conversation-<%= user.id %>">
-          <img class="avatar-img" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
-        </div>
+        <%= render "conversations/chat_avatar", interlocutor: user %>
         <div class="chat-info">
           <div class="chat-name"><%= user.user_name %></div>
         </div>

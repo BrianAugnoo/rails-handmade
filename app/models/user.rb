@@ -24,7 +24,11 @@ class User < ApplicationRecord
     Conversation.where("recipient_id = ? OR sender_id = ?", self.id, self.id)
   end
 
-  def online
+  def make_online!
+    unless self.update_column(:connected, true)
+      puts errors.full_messages
+      raise
+    end
     broadcast_append_to "conversations-icons",
                           target: "conversation-#{self.id}",
                           partial: "session/online_icon",
