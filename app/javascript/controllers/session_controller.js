@@ -11,5 +11,19 @@ export default class extends Controller {
       this.onlineTarget.click()
       console.log(this.onlineTarget);
     }
+
+    window.addEventListener("beforeunload", () => {
+      const data = new FormData(this.offlineTarget)
+      this.offlineTarget.preventDefault()
+      this.disconnect(data)
+    })
+  }
+
+  disconnect(data) {
+    fetch(this.offlineTarget.action, {
+      method: "POST",
+      body: data,
+      keepalive: true,
+    })
   }
 }

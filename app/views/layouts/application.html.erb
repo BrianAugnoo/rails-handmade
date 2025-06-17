@@ -25,6 +25,7 @@
   <body data-controller="session" data-session-target="body" online="false">
     <% if user_signed_in? %>
       <%= button_to "", online_session_path, method: :post, data: { turbo: :true, "session-target": "online"}, hidden: true %>
+      <%= button_to "", offline_session_path, method: :post, data: { turbo: :true, "session-target": "offline"}, hidden: true %>
     <% end %>
     <% flash.each do |key, value| %>
       <div class="alert alert-<%= key == "notice" ? "success" : "danger" %>">

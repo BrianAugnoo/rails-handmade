@@ -35,6 +35,17 @@ class User < ApplicationRecord
                           locals: { user: self }
   end
 
+  def make_offline!
+    unless self.update_column(:connected, false)
+      puts errors.full_messages
+      raise
+    end
+    broadcast_remove_to "conversations-icons",
+                          target: "conversation-#{self.id}",
+                          partial: "session/online_icon",
+                          locals: { user: self }
+  end
+
   private
 
   def valid_phone_number

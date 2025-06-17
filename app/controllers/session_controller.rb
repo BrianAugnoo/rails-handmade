@@ -9,5 +9,6 @@ class SessionController < ApplicationController
   end
 
   def offline
+    current_user.make_offline!
   end
 end
