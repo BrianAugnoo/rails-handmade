@@ -6,8 +6,10 @@ Rails.application.routes.draw do
 
   resources :art do
     resources :comments, only: [ :index, :create, :destroy ]
-    resources :likes, only: [ :create, :destroy ]
+    resources :likes, only: [ :create ]
   end
+
+  delete "art/:art_id/like" => "likes#destroy", as: :destroy_like
 
   resources :notifications, only: [ :index, :destroy ]
 
@@ -15,7 +17,7 @@ Rails.application.routes.draw do
   get "user_index" => "search#user_index", as: :user_index
 
   resources :conversations, only: [ :index, :show, :new, :create ]
-  
+
   post "session/online" => "session#online", as: :online_session
   post "session/offline" => "session#offline", as: :offline_session
 

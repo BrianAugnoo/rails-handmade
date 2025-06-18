@@ -24,10 +24,17 @@
         <p class="text-sm mb-3"><%= art.description %></p>
 
         <div class="flex space-x-4 text-sm">
-          <%= link_to "#", class: "hover:underline me-2" id: "art_#{art.id}_likes" do %>
-            <%= render "like", count: art.likes.size, art: art %>
-          <% end %>
-          <%= link_to "#", class: "hover:underline" do %>
+          <div id="<%= "art_#{art.id}_likes" %>" >
+            <%= render "like", current_user: current_user, art: art %>
+          </div>
+
+          <%=
+          button_to(
+          art_comments_path(art),
+          class: "hover:underline",
+          id: "art_#{art.id}_comments",
+          data: {turbo: true}) do
+          %>
             <%= render "comment", count: art.comments.size, art: art %>
           <% end %>
         </div>

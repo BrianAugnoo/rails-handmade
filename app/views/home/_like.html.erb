@@ -1,1 +1,12 @@
-<span id="art_<%= art.id%>_likes"> 👍<%= count %></span>
+
+<% liked = Like.liked?(current_user, art) %>
+<% color = liked ? "btn-primary" : "" %>
+<%=
+button_to(
+!liked ? art_likes_path(art) : destroy_like_path(art),
+class: "hover:underline me-2 btn #{color}",
+method: liked ? :delete : :post,
+data: {turbo: true}) do
+%>
+  <span>👍 <%= art.likes.size %></span>
+<% end %>
