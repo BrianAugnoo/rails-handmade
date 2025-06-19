@@ -24,6 +24,7 @@
         <p class="text-sm mb-3"><%= art.description %></p>
 
         <div class="flex space-x-4 text-sm">
+          <%= turbo_stream_from "turbo_#{art.id}_likes" %>
           <div id="<%= "art_#{art.id}_likes" %>" >
             <%= render "like", current_user: current_user, art: art %>
           </div>

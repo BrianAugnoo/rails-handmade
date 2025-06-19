@@ -1,7 +1,8 @@
 class LikesController < ApplicationController
   def create
-    like = Like.new(art_id: params[:art_id], user_id: current_user.id)
     art = Art.find(params[:art_id])
+    like = Like.new(art_id: art.id, user_id: current_user.id)
+    like.current_user = current_user
     if like.save
       respond_to do |format|
         format.turbo_stream do
@@ -15,7 +16,9 @@ class LikesController < ApplicationController
 
   def destroy
     art = Art.find(params[:art_id])
-    if Like.find_by(art: art, user: current_user).destroy
+    like = Like.find_by(art: art, user: current_user)
+    like.current_user = current_user
+    if like.destroy
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: turbo_stream.update("art_#{art.id}_likes", partial: "home/like", locals: { current_user: current_user, art: art })
