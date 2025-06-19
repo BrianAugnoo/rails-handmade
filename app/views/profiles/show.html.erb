@@ -1,0 +1,11 @@
+<%= render "profiletop" %>
+
+<h1><%= @user.user_name %>'s Artworks</h1>
+
+<% @artworks.each do |art| %>
+  <div class="artwork">
+    <h3>Artwork #<%= art.id %></h3>
+    <p><%= art.description %></p>
+    <p><strong>Tags:</strong> <%= art.tags %></p>
+  </div>
+<% end %>

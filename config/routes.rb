@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "profiles/show"
   devise_for :users
 
   get "up" => "rails/health#show", as: :rails_health_check
@@ -20,4 +21,6 @@ Rails.application.routes.draw do
   post "session/offline" => "session#offline", as: :offline_session
 
   post ":user_id/message" => "messages#create", as: :create_message
+
+  resource :profile, only: [ :show ]
 end
