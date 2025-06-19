@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_14_104538) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_17_125805) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -48,6 +48,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_14_104538) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "trust", null: false
     t.index ["user_id"], name: "index_arts_on_user_id"
   end
 
@@ -87,6 +88,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_14_104538) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.boolean "read", default: false
+    t.boolean "viewed", default: false, null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["created_at"], name: "index_messages_on_created_at"
     t.index ["user_id"], name: "index_messages_on_user_id"
@@ -130,6 +132,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_14_104538) do
     t.string "phone_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "online", default: false, null: false
+    t.boolean "connected", default: false, null: false
+    t.index ["connected"], name: "index_users_on_connected"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

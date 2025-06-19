@@ -17,7 +17,7 @@ end
 
 puts "creating arts..."
 10.times do
-  Art.create!(description: Faker::Lorem.sentence, user: artist, tags: "#art, #painting, #digital")
+  Art.create!(description: Faker::Lorem.sentence, user: artist, tags: "#art, #painting, #digital", trust: 93.2)
 end
 
 puts "creating comments..."
