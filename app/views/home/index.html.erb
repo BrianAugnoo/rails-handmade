@@ -29,13 +29,8 @@
             <%= render "like", current_user: current_user, art: art %>
           </div>
 
-          <%=
-          button_to(
-          art_comments_path(art),
-          class: "hover:underline",
-          id: "art_#{art.id}_comments",
-          data: {turbo: true}) do
-          %>
+          <%= turbo_stream_from "turbo_#{art.id}_comments" %>
+          <%= link_to art_comments_path(art), class: "", id: "art_#{art.id}_comments" do%>
             <%= render "comment", count: art.comments.size, art: art %>
           <% end %>
         </div>
