@@ -1,0 +1,20 @@
+<%= turbo_stream_from "turbo_comments_#{@art.id}" %>
+<div id="comments_<%= @art.id %>">
+  <% @comments.each do |comment|%>
+    <%= render "comment", comment: comment %>
+  <% end %>
+</div>
+
+<div class="position-fixed bottom-0 start-0 end-0 bg-white p-3">
+  <div class="message-input">
+    <%= form_with model: [@art, Comment.new], data: {turbo: true, turbo_stream: true, controller: "reset-input", action: "turbo:submit-end->reset-input#clear"}  do |form| %>
+      <div class="form-group">
+        <%= form.label :review, "Type your comment:" %>
+        <%= form.text_area :review, rows: 3, class: "form-control", placeholder: "Write your message here...", required: true, data: {"reset-input-target": "input"}%>
+      </div>
+      <div class="form-group">
+        <%= form.submit "Send", class: "btn btn-primary", data: {action: "submit->reset-input#clear"} %>
+      </div>
+    <% end %>
+  </div>
+</div>
