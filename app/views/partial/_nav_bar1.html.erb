@@ -11,6 +11,6 @@
     <%= link_to "Home", root_path, class: "nav-link" %>
     <%= link_to "Search", search_user_path, class: "nav-link" %>
     <%= link_to "Upload", new_art_path, class: "nav-link" %>
-    <%= link_to "Profile", "#", class: "nav-link" %>
+    <%= link_to "Profile", profile_path(current_user), class: "nav-link" %>
   </div>
 </nav>

@@ -35,6 +35,10 @@ class User < ApplicationRecord
                           locals: { user: self }
   end
 
+  def subscribed?(user)
+    Subscription.exists?(subscriber_id: self.id, subscribed_id: user.id)
+  end
+
   private
 
   def valid_phone_number
