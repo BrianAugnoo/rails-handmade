@@ -24,6 +24,10 @@
 
       <div class="p-3">
         <p class="font-bold text-sm mb-1"><%= art.user.user_name %></p>
+
+        <!-- ✅ Inserted image here -->
+        <%= image_tag "artworkexample.jpg", class: "w-full rounded mb-2", alt: "Additional content image", width: 310, height: 200 %>
+
         <p class="text-xs text-gray-500 mb-2">
           <%= art.created_at.strftime("%b %d, %Y") %>
         </p>
