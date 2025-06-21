@@ -8,5 +8,5 @@ class: "hover:underline me-2 btn #{color}",
 method: liked ? :delete : :post,
 data: {turbo: true}) do
 %>
-  <span>👍 <%= art.likes.size %></span>
+<span>👍 <%= art.likes.size %></span>
 <% end %>
