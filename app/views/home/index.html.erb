@@ -1,15 +1,21 @@
 
 <div class="max-w-md mx-auto p-4 space-y-6">
 
-
   <div class="text-right">
     <%= link_to "Publish", new_art_path(Art.new),
                 class: "bg-blue-500 text-white px-3 py-1 rounded" %>
   </div>
 
-
   <% @arts.each do |art| %>
-    <div class="border rounded-lg overflow-hidden">
+
+<!-- RF: Picture and Username -->
+<div class="d-flex align-items-center mb-2">
+  <%= image_tag "default_avatar.png", alt: "User Avatar", class: "rounded-circle me-2", width: 40, height: 40 %>
+  <span class="fw-bold">UsernameHere</span>
+</div>
+<!-- RF: End Picture and Username -->
+
+    <div class="border rounded-4 overflow-hidden mb-4">
       <% if art.photo.attached? %>
         <%= cl_image_tag art.photo.key, class: "w-full" %>
       <% elsif art.video.attached? %>
@@ -18,19 +24,24 @@
 
       <div class="p-3">
         <p class="font-bold text-sm mb-1"><%= art.user.user_name %></p>
+
+        <!-- ✅ Inserted image here -->
+        <%= image_tag "artworkexample.jpg", class: "w-full rounded mb-2", alt: "Additional content image", width: 310, height: 200 %>
+
         <p class="text-xs text-gray-500 mb-2">
           <%= art.created_at.strftime("%b %d, %Y") %>
         </p>
         <p class="text-sm mb-3"><%= art.description %></p>
 
-        <div class="flex space-x-4 text-sm">
+
+        <div class="d-flex space-x-4 text-sm">
           <%= turbo_stream_from "turbo_#{art.id}_likes" %>
           <div id="<%= "art_#{art.id}_likes" %>" >
             <%= render "like", current_user: current_user, art: art %>
           </div>
 
           <%= turbo_stream_from "turbo_#{art.id}_comments" %>
-          <%= link_to art_comments_path(art), class: "", id: "art_#{art.id}_comments" do%>
+          <%= link_to art_comments_path(art), class: "btn", id: "art_#{art.id}_comments" do%>
             <%= render "comment", count: art.comments.size, art: art %>
           <% end %>
         </div>
