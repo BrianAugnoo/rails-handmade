@@ -1,25 +1,44 @@
-<%= form_with model: @art, url: art_index_path(@art), local: true do |f| %>
-  <div class="form-group">
-    <%= f.label :tags, "Tags (comma-separated):" %>
-    <%= f.text_field :tags, class: "form-control", placeholder: "Enter tags here..." %>
+<%= render "partial/nav_bar1" %>
+<%= render "partial/back_button" %>
+
+<!-- Main Container -->
+<div class="container px-3 py-4">
+  <div class="bg-white shadow-sm rounded-4 p-3">
+    <h5 class="text-center text-primary mb-4">New Art</h5>
+
+    <%= form_with model: @art, url: art_index_path(@art), local: true do |f| %>
+
+      <!-- Tags -->
+      <div class="mb-3">
+        <%= f.label :tags, "Tags", class: "form-label small fw-semibold" %>
+        <%= f.text_field :tags, class: "form-control form-control-sm", placeholder: "e.g. abstract, nature" %>
+      </div>
+
+      <!-- Description -->
+      <div class="mb-3">
+        <%= f.label :description, "Description", class: "form-label small fw-semibold" %>
+        <%= f.text_area :description, rows: 4, class: "form-control form-control-sm", placeholder: "Describe your artwork..." %>
+      </div>
+
+      <!-- Photo Upload -->
+      <div class="mb-3">
+        <%= f.label :photo, "Image", class: "form-label small fw-semibold" %>
+        <%= f.file_field :photo, accept: "image/*", class: "form-control form-control-sm", required: true %>
+      </div>
+
+      <!-- Video Upload -->
+      <div class="mb-3">
+        <%= f.label :video, "Video (optional)", class: "form-label small fw-semibold" %>
+        <%= f.file_field :video, accept: "video/*", class: "form-control form-control-sm" %>
+      </div>
+
+      <!-- Submit -->
+      <div class="d-grid">
+        <%= f.submit "Publish", class: "btn btn-primary btn-sm rounded-pill" %>
+      </div>
+
+    <% end %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :description, "Description:" %>
-    <%= f.text_area :description, rows: 5, class: "form-control", placeholder: "Describe your art..." %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :photo, "Upload Image:" %>
-    <%= f.file_field :photo, accept: "image/*", class: "form-control", required: true %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :video, "Upload Video:" %>
-    <%= f.file_field :video, accept: "video/*", class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.submit "Publish Art", class: "btn btn-primary" %>
-  </div>
-<% end %>
+  <p class="text-center text-muted small mt-4">Msg verification past or not</p>
+</div>
