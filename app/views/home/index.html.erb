@@ -33,14 +33,15 @@
         </p>
         <p class="text-sm mb-3"><%= art.description %></p>
 
-        <div class="flex space-x-4 text-sm">
+
+        <div class="d-flex space-x-4 text-sm">
           <%= turbo_stream_from "turbo_#{art.id}_likes" %>
           <div id="<%= "art_#{art.id}_likes" %>" >
             <%= render "like", current_user: current_user, art: art %>
           </div>
 
           <%= turbo_stream_from "turbo_#{art.id}_comments" %>
-          <%= link_to art_comments_path(art), class: "", id: "art_#{art.id}_comments" do%>
+          <%= link_to art_comments_path(art), class: "btn", id: "art_#{art.id}_comments" do%>
             <%= render "comment", count: art.comments.size, art: art %>
           <% end %>
         </div>
