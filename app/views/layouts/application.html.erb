@@ -29,6 +29,9 @@
       <% end %>
 
       <%= render "partial/nav_bar1" %>
+      <% unless current_page?(root_path) %>
+        <%= render "partial/back_button" %>
+      <% end %>
       <% flash.each do |key, value| %>
         <div class="alert alert-<%= key == "notice" ? "success" : "danger" %>">
           <%= value %>
