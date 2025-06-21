@@ -22,4 +22,5 @@ Rails.application.routes.draw do
   post "session/offline" => "session#offline", as: :offline_session
 
   post ":user_id/message" => "messages#create", as: :create_message
+  get ":user_id/profile" => "profile#show", as: :user_profile
 end
