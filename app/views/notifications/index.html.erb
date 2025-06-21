@@ -7,18 +7,10 @@
   </div>
 
   <!-- Notification List -->
-  <div class="flex-grow-1 overflow-auto px-3">
+  <%= turbo_stream_from "notification_#{current_user.id}" %>
+  <div class="flex-grow-1 overflow-auto px-3" id="notifications">
     <% @notifications.each do |notification| %>
-      <div class="mb-2 p-2 border rounded">
-        <div class="d-flex align-items-center">
-          <div class="me-2 d-flex align-items-center">
-            <img src="<%= asset_path('default-avatar.jpg') %>" class="rounded-circle" width="40" height="40" />
-          </div>
-          <div class="flex-grow-1">
-            <p class="mb-0"><%= notification.content %></p>
-          </div>
-        </div>
-      </div>
+      <%= render "notification", notification: notification %>
     <% end %>
   </div>
 
