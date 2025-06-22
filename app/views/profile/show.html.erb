@@ -1,11 +1,17 @@
 <div class="container py-3 overflow-auto">
   <div class="d-flex align-items-center flex-nowrap overflow-hidden">
     <!-- Avatar réduit -->
-    <img src="<%= asset_path('default-avatar.jpg') %>"
-         class="rounded-circle me-3 flex-shrink-0"
-         width="60" height="60"
-         alt="Avatar">
-
+    <% if @user.avatar.attached? %>
+      <%= cl_image_tag @user.avatar.key,
+      class: "rounded-circle me-3 flex-shrink-0",
+      width: "60", height: "60"
+      %>
+    <% else %>
+      <img src="<%= asset_path('default-avatar.jpg') %>"
+          class="rounded-circle me-3 flex-shrink-0"
+          width="60" height="60"
+          alt="Avatar">
+    <% end %>
     <!-- Infos utilisateur -->
     <div class="flex-grow-1">
       <p class="fw-semibold mb-2 small"><%= @user.user_name %></p>
