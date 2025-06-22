@@ -16,9 +16,11 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
 
   validates :user_name, presence: true, uniqueness: true
-  validates :password, format: { with: /\A(?=.*[A-Z])(?=.*\d).+\z/, message: "the password must contain a capital letter and a number" }
+  validate :normalize_phone_number
   validate :valid_phone_number
   validates :phone_number, uniqueness: true, if: :valid_phone_number
+
+  has_one_attached :avatar
 
   def conversations
     Conversation.where("recipient_id = ? OR sender_id = ?", self.id, self.id)
@@ -35,6 +37,14 @@ class User < ApplicationRecord
                           locals: { user: self }
   end
 
+  def subscribed?(user)
+    Subscription.exists?(subscriber_id: self.id, subscribed_id: user.id)
+  end
+
+  def change_column(params)
+    raise
+  end
+
   private
 
   def valid_phone_number
@@ -43,5 +53,18 @@ class User < ApplicationRecord
     elsif !phone_number.nil?
       true
     end
+  end
+
+  def normalize_phone_number
+    if phone_number.present?
+      normalized = Phony.normalize(phone_number)
+      if normalized != phone_number
+        self.phone_number = normalized
+      end
+    end
+  rescue Phony::NormalizationError => e
+    errors.add(:phone_number, "could not be normalized: #{e.message}")
+  rescue StandardError => e
+    errors.add(:phone_number, "is invalid: #{e.message}")
   end
 end

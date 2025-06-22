@@ -18,19 +18,28 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <!-- intl-tel-input CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@17/build/css/intlTelInput.min.css" />
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body data-controller="session" data-session-target="body" online="false">
-    <% if user_signed_in? %>
-      <%= button_to "", online_session_path, method: :post, data: { turbo: :true, "session-target": "online"}, hidden: true %>
-    <% end %>
-    <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key == "notice" ? "success" : "danger" %>">
-        <%= value %>
-      </div>
-    <% end %>
+    <div style="overflow: hidden">
+      <% if user_signed_in? %>
+        <%= button_to "", online_session_path, method: :post, data: { turbo: :true, "session-target": "online"}, hidden: true %>
+        <%= render "partial/nav_bar1" %>
+      <% end %>
+
+      <% unless current_page?(root_path) %>
+        <%= render "partial/back_button" %>
+      <% end %>
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key == "notice" ? "success" : "danger" %>">
+          <%= value %>
+        </div>
+      <% end %>
+    </div>
     <%= yield %>
   </body>
 </html>
