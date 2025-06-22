@@ -21,6 +21,10 @@ class ProfileController < ApplicationController
     end
   end
 
+  def settings
+    @user = current_user
+  end
+
   private
   def set_params
     params.require(:user).permit(:user_name, :phone_number, :avatar)

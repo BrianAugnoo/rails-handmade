@@ -27,4 +27,5 @@ Rails.application.routes.draw do
   get ":user_id/profile/feed" => "profile#feed", as: :feed
   get "profile/edit" => "profile#edit", as: :edit_profile
   post "profile" => "profile#update", as: :update_profile
+  get "profile/settings" => "profile#settings", as: :settings
 end

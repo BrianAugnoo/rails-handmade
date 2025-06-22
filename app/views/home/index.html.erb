@@ -15,17 +15,19 @@
 <!-- RF: End Picture and Username -->
 
     <div class="border rounded-4 overflow-hidden mb-4">
-      <% if art.photo.attached? %>
-        <%= cl_image_tag art.photo.key, class: "w-full" %>
-      <% elsif art.video.attached? %>
-        <%= cl_video_tag art.video.key, controls: true, class: "w-full" %>
-      <% end %>
 
       <div class="p-3">
         <p class="font-bold text-sm mb-1"><%= art.user.user_name %></p>
 
-        <!-- ✅ Inserted image here -->
-        <%= image_tag "artworkexample.jpg", class: "w-full rounded mb-2", alt: "Additional content image", width: 310, height: 200 %>
+        <% if art.photo.attached? %>
+          <%= cl_image_tag art.photo.key, class: "w-full rounded mb-2 img-fluid object-fit-contain", alt: "Additional content image", width: 310, height: 200 %>
+        <% else %>
+          <%= image_tag "artworkexample.jpg", class: "w-full rounded mb-2", alt: "Additional content image", width: 310, height: 200 %>
+        <% end %>
+
+        <% if art.video.attached? %>
+          <%= cl_video_tag art.video.key, controls: true, class: "w-full" %>
+        <% end %>
 
         <p class="text-xs text-gray-500 mb-2">
           <%= art.created_at.strftime("%b %d, %Y") %>
