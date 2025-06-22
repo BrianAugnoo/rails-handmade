@@ -1,7 +1,14 @@
+<%= render "partial/nav_bar1" %>
+
 <div data-controller="search">
-  <div class="chat-search-bar">
-    <%= form_with url: search_user_path, method: :get, data: { turbo_stream: true, "search-target": "form" } do |f| %>
-      <%= f.text_field :query , id: "chat-search-input", data: {"search-target": "input", action: "keyup->search#searchUser"} %>
+  <!-- Back + Search bar container -->
+  <div class="chat-search-bar mb-3 d-flex align-items-center gap-2">
+    <!-- Back Button -->
+    <%= link_to "← Back", root_path, class: "btn btn-outline-secondary" %>
+
+    <!-- Search form -->
+    <%= form_with url: search_user_path, method: :get, data: { turbo_stream: true, "search-target": "form" }, html: { class: "flex-grow-1" } do |f| %>
+      <%= f.text_field :query, id: "chat-search-input", class: "form-control w-100", placeholder: "Search...", data: { "search-target": "input", action: "keyup->search#searchUser" } %>
     <% end %>
   </div>
 
@@ -10,10 +17,12 @@
   <div id="search-user"></div>
 
   <%= turbo_stream_from "user#{current_user.id}_conversations" %>
-  <div class="chat-list-container"  data-search-target="chatList" id="conversations">
+  <div class="chat-list-container" data-search-target="chatList" id="conversations">
     <% @conversations.each do |conversation| %>
       <% interlocutor = conversation.interlocutor(current_user) %>
-      <%= render "conversation", conversation: conversation, interlocutor: interlocutor %>
+      <div class="simple-conversation-box p-2 rounded bg-white">
+        <%= render "conversation", conversation: conversation, interlocutor: interlocutor %>
+      </div>
     <% end %>
   </div>
 </div>
