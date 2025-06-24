@@ -1,3 +1,5 @@
-<% @arts.each do |art| %>
-  <%= render "art/art", art: art, current_user: current_user %>
-<% end %>
+<div data-controller="anchor">
+  <% @arts.each do |art| %>
+    <%= render "art/art", art: art, current_user: current_user, last: @last %>
+  <% end %>
+</div>

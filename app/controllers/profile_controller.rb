@@ -5,6 +5,7 @@ class ProfileController < ApplicationController
 
   def feed
     @arts = User.find(params[:user_id]).arts
+    @last = Art.find(params[:data])
   end
 
   def edit
