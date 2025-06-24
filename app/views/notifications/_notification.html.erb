@@ -5,7 +5,10 @@
         <img src="<%= asset_path('default-avatar.jpg') %>" class="rounded-circle" width="40" height="40" />
       </div>
       <div class="flex-grow-1">
-        <span class="notification-date"><%= notification.created_at.strftime("%B %d, %Y") %></span>
+        <span class="notification-date">
+          <span><%= notification.created_at.strftime("%B %d, %Y") %></span>
+          <span style="margin-left: 130px;"><%= notification.user.user_name %></span>
+        </span>
         <p class="mb-0"><%= notification.content %></p>
       </div>
     </div>

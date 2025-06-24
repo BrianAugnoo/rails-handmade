@@ -1,0 +1,48 @@
+<div class="container py-3 overflow-auto">
+  <div class="d-flex align-items-center flex-nowrap overflow-hidden">
+    <!-- Avatar réduit -->
+    <% if @user.avatar.attached? %>
+      <%= cl_image_tag @user.avatar.key,
+      class: "rounded-circle me-3 flex-shrink-0",
+      width: "60", height: "60"
+      %>
+    <% else %>
+      <img src="<%= asset_path('default-avatar.jpg') %>"
+          class="rounded-circle me-3 flex-shrink-0"
+          width="60" height="60"
+          alt="Avatar">
+    <% end %>
+    <!-- Infos utilisateur -->
+    <div class="flex-grow-1">
+      <p class="fw-semibold mb-2 small"><%= @user.user_name %></p>
+
+      <!-- Stats compactes -->
+      <div class="d-flex justify-content-start gap-3 text-center small">
+        <div>
+          <p class="fw-bold mb-0"><%= @user.arts.size %></p>
+          <p class="text-muted mb-0">Artworks</p>
+        </div>
+        <div id="subscribeds">
+           <%= render "subscribeds" %>
+        </div>
+        <div>
+          <p class="fw-bold mb-0"><%= @user.subscribers.count %></p>
+          <p class="text-muted mb-0">Following</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% if @user == current_user %>
+    <%= render "self_controll" %>
+  <% else %>
+    <%= render "user_controll" %>
+  <% end %>
+</div>
+
+<div class="arts-cards mb-5">
+  <% @user.arts.each do |art| %>
+    <%= link_to feed_path(anchor: "art_#{art.id}") do %>
+      <%= image_tag "artworkexample.jpg", class: "w-full rounded mb-2", alt: "Additional content image", width: 100, height: 100 %>
+    <% end %>
+  <% end %>
+</div>

@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="search"
 export default class extends Controller {
-  static targets = ["input", "form", "chatList"]
+  static targets = ["input", "form", "chatList", "users", "arts"]
 
   searchUser(){
     this.formTarget.requestSubmit();
@@ -12,5 +12,17 @@ export default class extends Controller {
     } else {
        this.chatListTarget.hidden = false;
     }
+  }
+
+  showUsers(event) {
+    event.preventDefault();
+    this.usersTarget.hidden = false;
+    this.artsTarget.hidden = true;
+  }
+
+  showArts(event) {
+    event.preventDefault();
+    this.artsTarget.hidden = false;
+    this.usersTarget.hidden = true;
   }
 }

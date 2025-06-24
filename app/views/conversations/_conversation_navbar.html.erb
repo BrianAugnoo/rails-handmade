@@ -1,7 +1,19 @@
 <div class="container">
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#"><%= @interlocutor.user_name %></a>
+      <% if @interlocutor.avatar.attached? %>
+          <%= cl_image_tag @interlocutor.avatar.key,
+              class: "rounded-circle me-3 flex-shrink-0",
+              width: "60", height: "60"
+          %>
+        <% else %>
+          <img src="<%= asset_path('default-avatar.jpg') %>"
+              class="rounded-circle me-3 flex-shrink-0"
+              width="60" height="60"
+              alt="Avatar">
+        <% end %>
+
+      <%= link_to @interlocutor.user_name, profile_path(@interlocutor), class: "navbar-brand" %>
     </div>
   </nav>
 </div>

@@ -1,17 +1,16 @@
-<%= link_to "Back", "#", class: "btn btn-primary" %>
-
-<%= render "conversation_navbar" %>
-
-<div class="px-3 pt-3">
-  <a href="javascript:history.back()" class="btn btn-outline-secondary btn-sm rounded-pill ms-2">
-    ← Back
-  </a>
+<% content_for :unscrollable do %>
+<div class="d-flex">
+  <%= render "partial/back_button" %>
+  <%= render "conversation_navbar" %>
 </div>
+<% end %>
+
+<div data-controller="destroy-navbar"></div>
 
 <div class="container d-flex flex-column min-vh-100 mt-5">
   <div class="flex-grow-1 w-100">
     <%= turbo_stream_from "conversation_#{@conversation.id}_#{current_user.id}" %>
-    <div id="messages" class="messages d-flex w-100 flex-column">
+    <div id="messages" class="messages d-flex w-100 flex-column big-margin">
       <% @conversation.messages.each do |message| %>
         <% position = current_user == message.user ? "ms-auto" : "" %>
         <%= render "message", message: message, position: position %>
