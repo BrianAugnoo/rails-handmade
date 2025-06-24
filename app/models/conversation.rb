@@ -1,4 +1,6 @@
 class Conversation < ApplicationRecord
+  attr_accessor :skip_broadcast
+
   # reminder convesation.recipient/sender returns the user
   belongs_to :recipient, class_name: "User", foreign_key: "recipient_id"
   belongs_to :sender, class_name: "User", foreign_key: "sender_id"
@@ -8,7 +10,7 @@ class Conversation < ApplicationRecord
   validates :recipient, uniqueness: { scope: :sender, message: "You already have a conversation with this user" }
 
   before_validation :unique_combination
-  after_create_commit :broadcast_create
+  after_create_commit :broadcast_create, unless: -> { skip_broadcast }
   # track existing conversations between two users
   def self.between?(user1, user2)
     conversation = Conversation.where(recipient: user1, sender: user2).or(Conversation.where(recipient: user2, sender: user1))
@@ -40,14 +42,16 @@ class Conversation < ApplicationRecord
   end
 
   def broadcast_create
+    return if sender.nil? || recipient.nil?
+
     broadcast_prepend_to "user#{self.sender.id}_conversations",
-                          target: "conversations",
-                          partial: "conversations/conversation",
-                          locals: { conversation: self, interlocutor: self.recipient }
+      target: "conversations",
+      partial: "conversations/conversation",
+      locals: { conversation: self, interlocutor: self.recipient }
 
     broadcast_prepend_to "user#{self.recipient.id}_conversations",
-                          target: "conversations",
-                          partial: "conversations/conversation",
-                          locals: { conversation: self, interlocutor: self.recipient }
+      target: "conversations",
+      partial: "conversations/conversation",
+      locals: { conversation: self, interlocutor: self.recipient }
   end
 end
