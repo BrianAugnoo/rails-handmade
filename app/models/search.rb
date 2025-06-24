@@ -11,6 +11,24 @@ class Search
     result
   end
 
+  def self.all_users(query)
+    query = query.match(/\S.*\S*/)
+    if query.present?
+      User.where("user_name ILIKE ?", "%#{query}%")
+    else
+      nil
+    end
+  end
+
+  def self.arts(query)
+    query = query.match(/\S.*\S*/)
+    if query.present?
+      Art.where("tags ILIKE ? OR description ILIKE ?", "%#{query}%", "%#{query}%")
+    else
+      nil
+    end
+  end
+
   def self.art(query)
     Art.where("tags ILIKE ?", "%#{query}%").first(10)
   end
