@@ -22,12 +22,11 @@
           <p class="fw-bold mb-0"><%= @user.arts.size %></p>
           <p class="text-muted mb-0">Artworks</p>
         </div>
-        <div>
-          <p class="fw-bold mb-0"><%= @user.subscribers.count %></p>
-          <p class="text-muted mb-0">Followers</p>
+        <div id="subscribeds">
+           <%= render "subscribeds" %>
         </div>
         <div>
-          <p class="fw-bold mb-0"><%= @user.subscribeds.count %></p>
+          <p class="fw-bold mb-0"><%= @user.subscribers.count %></p>
           <p class="text-muted mb-0">Following</p>
         </div>
       </div>
