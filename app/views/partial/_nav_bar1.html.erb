@@ -1,22 +1,50 @@
 <div id="nav-bar">
   <div class="d-flex justify-content-between align-items-center px-3 py-2 border-bottom bg-light">
-    <strong>handmade</strong>
-    <div>
-      <%= link_to notifications_path do %>
-        <span class="me-3">notif</span>
+    <strong class="fs-5">handmade</strong>
+    <div class="d-flex">
+      <%= link_to notifications_path, class: "btn btn-outline-primary me-2 btn-sm rounded-pill d-flex align-items-center" do %>
+        <i class="fa-solid fa-bell me-1"></i> Notifications
       <% end %>
-      <%= link_to conversations_path do %>
-        <span>msg</span>
+      <%= link_to conversations_path, class: "btn btn-primary btn-sm rounded-pill d-flex align-items-center" do %>
+        <i class="fa-solid fa-message me-1"></i> Messages
       <% end %>
     </div>
   </div>
-
-  <nav class="navbar fixed-bottom navbar-light bg-light border-top">
-    <div class="container-fluid justify-content-around">
-      <%= link_to "Home", root_path, class: "nav-link" %>
-      <%= link_to "Search", search_path, class: "nav-link" %>
-      <%= link_to "Upload", new_art_path, class: "nav-link" %>
-      <%= link_to "Profile", profile_path(current_user), class: "nav-link" %>
-    </div>
-  </nav>
 </div>
+
+
+
+<nav class="navbar fixed-bottom navbar-light bg-light border-top shadow-sm">
+  <div class="container-fluid d-flex justify-content-around text-center small">
+
+    <%= link_to root_path, class: "nav-item flex-fill text-decoration-none #{'active text-primary' if current_page?(root_path)}" do %>
+      <div class="d-flex flex-column align-items-center py-1">
+        <i class="fa-solid fa-house fa-lg mb-1"></i>
+        <span>Home</span>
+      </div>
+    <% end %>
+
+    <%= link_to search_path, class: "nav-item flex-fill text-decoration-none #{'active text-primary' if current_page?(search_path)}" do %>
+      <div class="d-flex flex-column align-items-center py-1">
+        <i class="fa-solid fa-magnifying-glass fa-lg mb-1"></i>
+        <span>Search</span>
+      </div>
+    <% end %>
+
+    <%= link_to new_art_path, class: "nav-item flex-fill text-decoration-none #{'active text-primary' if current_page?(new_art_path)}" do %>
+      <div class="d-flex flex-column align-items-center py-1">
+        <i class="fa-solid fa-upload fa-lg mb-1"></i>
+        <span>Upload</span>
+      </div>
+    <% end %>
+
+    <%= link_to profile_path(current_user), class: "nav-item flex-fill text-decoration-none #{'active text-primary' if current_page?(profile_path(current_user))}" do %>
+      <div class="d-flex flex-column align-items-center py-1">
+        <i class="fa-solid fa-user fa-lg mb-1"></i>
+        <span>Profile</span>
+      </div>
+    <% end %>
+
+  </div>
+</nav>
+
