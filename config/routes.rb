@@ -30,4 +30,6 @@ Rails.application.routes.draw do
   get "profile/edit" => "profile#edit", as: :edit_profile
   post "profile" => "profile#update", as: :update_profile
   get "profile/settings" => "profile#settings", as: :settings
+
+  resources :subscriptions, only: [ :create, :destroy ]
 end

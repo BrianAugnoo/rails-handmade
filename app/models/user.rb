@@ -41,6 +41,10 @@ class User < ApplicationRecord
     Subscription.exists?(subscriber_id: self.id, subscribed_id: user.id)
   end
 
+  def subscription(user)
+   Subscription.find_by(subscriber: self, subscribed: user)
+  end
+
   def change_column(params)
     raise
   end
