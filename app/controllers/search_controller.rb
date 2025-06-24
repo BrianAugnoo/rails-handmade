@@ -22,6 +22,23 @@ class SearchController < ApplicationController
     end
   end
 
+  def results
+    users = Search.all_users(params[:query])
+    arts = Search.arts(params[:query])
+
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream:
+          turbo_stream.replace(
+            "results",
+            partial: "search/result",
+            locals: { users: users, arts: arts }
+          )
+      end
+      format.html { redirect_to root_path }
+    end
+  end
+
   def user_index
     @users = []
     params[:users].each do |user_id|

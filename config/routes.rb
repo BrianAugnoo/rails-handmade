@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   get "search_user" => "search#search_user", as: :search_user
   get "user_index" => "search#user_index", as: :user_index
+  get "search" => "search#index", as: :search
+  post "search" => "search#results", as: :search_results
 
   resources :conversations, only: [ :index, :show, :new, :create ]
 
