@@ -2,3 +2,20 @@
 @import "conversations";
 @import "searchbarConversations";
 @import "profile";
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body.no-scroll {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* on garde le scroll global bloqué */
+}
+
+.scrollable {
+  flex: 1 1 auto;        
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}

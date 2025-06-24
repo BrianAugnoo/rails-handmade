@@ -1,4 +1,4 @@
-<%= link_to conversation_path(conversation), class: "chat-item" do %>
+<%= link_to conversation_path(conversation, anchor: "message-#{conversation.messages.last.id}"), class: "chat-item" do %>
   <%= render "conversations/chat_avatar", interlocutor: interlocutor %>
   <div class="chat-info">
     <div class="chat-name"><%= interlocutor.user_name %></div>

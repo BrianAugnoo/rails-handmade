@@ -24,8 +24,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body data-controller="session" data-session-target="body" online="false">
-    <div style="overflow: hidden">
+  <body data-controller="session" data-session-target="body" online="false" class="no-scroll">
       <% if user_signed_in? %>
         <%= button_to "", online_session_path, method: :post, data: { turbo: :true, "session-target": "online"}, hidden: true %>
         <%= render "partial/nav_bar1" %>
@@ -37,7 +36,10 @@
           <%= value %>
         </div>
       <% end %>
+
+      <%= yield :unscrollable %>
+    <div class="scrollable">
+      <%= yield %>
     </div>
-    <%= yield %>
   </body>
 </html>
