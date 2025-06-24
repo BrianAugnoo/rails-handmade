@@ -41,7 +41,7 @@
 
 <div class="arts-cards mb-5">
   <% @user.arts.each do |art| %>
-    <%= link_to feed_path(anchor: "art_#{art.id}") do %>
+    <%= link_to feed_path(data: art.id) do %>
       <%= image_tag "artworkexample.jpg", class: "w-full rounded mb-2", alt: "Additional content image", width: 100, height: 100 %>
     <% end %>
   <% end %>

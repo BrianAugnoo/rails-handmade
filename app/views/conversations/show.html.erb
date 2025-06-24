@@ -10,10 +10,10 @@
 <div class="container d-flex flex-column min-vh-100 mt-5">
   <div class="flex-grow-1 w-100">
     <%= turbo_stream_from "conversation_#{@conversation.id}_#{current_user.id}" %>
-    <div id="messages" class="messages d-flex w-100 flex-column big-margin">
+    <div id="messages" class="messages d-flex w-100 flex-column big-margin" data-controller="anchor">
       <% @conversation.messages.each do |message| %>
         <% position = current_user == message.user ? "ms-auto" : "" %>
-        <%= render "message", message: message, position: position %>
+        <%= render "message", message: message, position: position, last: @conversation.messages.last %>
       <% end %>
     </div>
   </div>
