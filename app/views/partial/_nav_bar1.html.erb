@@ -2,8 +2,12 @@
   <div class="d-flex justify-content-between align-items-center px-3 py-2 border-bottom bg-light">
     <strong>handmade</strong>
     <div>
-      <span class="me-3">notif</span>
-      <span>msg</span>
+      <%= link_to notifications_path do %>
+        <span class="me-3">notif</span>
+      <% end %>
+      <%= link_to conversations_path do %>
+        <span>msg</span>
+      <% end %>
     </div>
   </div>
 

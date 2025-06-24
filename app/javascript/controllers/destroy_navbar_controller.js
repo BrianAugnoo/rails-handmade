@@ -4,6 +4,9 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   connect() {
     console.log("destroy")
-    document.querySelector("#nav-bar").remove()
+    const nav_bar = document.querySelector("#nav-bar")
+    if (nav_bar !== null){
+      nav_bar.remove()
+    }
   }
 }
