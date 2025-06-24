@@ -27,7 +27,7 @@ end
 
 puts "creating likes..."
 10.times do
-  Like.create!(user: User.all.sample, art: Art.all.sample)
+  Like.create!(user: User.all.sample, art: Art.all.sample, skip_broadcast: true)
 end
 
 puts "creating notifications..."
@@ -43,7 +43,9 @@ end
 puts "creating conversations..."
 User.where.not(id: artist.id).each do |user|
   if !Conversation.between?(artist, user)
-    Conversation.create!(recipient: artist, sender: user)
+    conversation = Conversation.new(recipient: artist, sender: user)
+    conversation.skip_broadcast = true
+    conversation.save!
   end
 end
 
