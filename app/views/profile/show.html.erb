@@ -1,48 +1,60 @@
-<div class="container py-3 overflow-auto">
-  <div class="d-flex align-items-center flex-nowrap overflow-hidden">
-    <!-- Avatar réduit -->
+<div class="container py-3">
+  <!-- Profile Header -->
+  <div class="d-flex align-items-center justify-content-center mb-2"> <!-- was mb-4 -->
+    <!-- Avatar -->
     <% if @user.avatar.attached? %>
       <%= cl_image_tag @user.avatar.key,
-      class: "rounded-circle me-3 flex-shrink-0",
-      width: "60", height: "60"
-      %>
+        class: "rounded-circle me-4",
+        width: "80", height: "80" %>
     <% else %>
       <img src="<%= asset_path('default-avatar.jpg') %>"
-          class="rounded-circle me-3 flex-shrink-0"
-          width="60" height="60"
+          class="rounded-circle me-4"
+          width="80" height="80"
           alt="Avatar">
     <% end %>
-    <!-- Infos utilisateur -->
-    <div class="flex-grow-1">
-      <p class="fw-semibold mb-2 small"><%= @user.user_name %></p>
 
-      <!-- Stats compactes -->
-      <div class="d-flex justify-content-start gap-3 text-center small">
-        <div>
-          <p class="fw-bold mb-0"><%= @user.arts.size %></p>
-          <p class="text-muted mb-0">Artworks</p>
+    <!-- Username and Stats -->
+    <div>
+      <!-- Username -->
+      <p class="fw-semibold fs-5 mb-2 mb-lg-3"><%= @user.user_name %></p>
+
+      <!-- Stats Row -->
+      <div class="d-flex gap-4">
+        <div class="text-center">
+          <p class="mb-0 fw-bold"><%= @user.arts.size %></p>
+          <small class="text-muted">Artworks</small>
         </div>
-        <div id="subscribeds">
-           <%= render "subscribeds" %>
+        <div id="subscribeds" class="text-center">
+          <%= render "subscribeds" %>
         </div>
-        <div>
-          <p class="fw-bold mb-0"><%= @user.subscribers.count %></p>
-          <p class="text-muted mb-0">Following</p>
+        <div class="text-center">
+          <p class="mb-0 fw-bold"><%= @user.subscribers.count %></p>
+          <small class="text-muted">Following</small>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Control Buttons -->
   <% if @user == current_user %>
     <%= render "self_controll" %>
   <% else %>
     <%= render "user_controll" %>
   <% end %>
-</div>
 
-<div class="arts-cards mb-5">
-  <% @user.arts.each do |art| %>
-    <%= link_to feed_path(anchor: "art_#{art.id}") do %>
-      <%= image_tag "artworkexample.jpg", class: "w-full rounded mb-2", alt: "Additional content image", width: 100, height: 100 %>
-    <% end %>
-  <% end %>
+  <!-- Gallery Grid -->
+  <div class="px-2 mt-2"> <!-- optional: add mt-2 if you still want a tiny gap -->
+    <div class="row mx-n1 my-n1">
+      <% @user.arts.each do |art| %>
+        <div class="col-4 col-sm-4 col-md-3 col-lg-3 px-1 py-1">
+          <%= link_to feed_path(anchor: "art_#{art.id}"), class: "d-block position-relative w-100" do %>
+            <%= image_tag "artworkexample.jpg",
+                  class: "w-100",
+                  style: "aspect-ratio: 1/1; object-fit: cover; border-radius: 8px;",
+                  alt: "Artwork" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
