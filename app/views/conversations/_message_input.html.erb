@@ -1,10 +1,27 @@
-<div class="message-input">
-  <%= form_with model: @message, url: create_message_path(@interlocutor), data: {turbo: use_turbo,turbo_stream: use_turbo, controller: "reset-input", action: "turbo:submit-end->reset-input#clear"}  do |form| %>
-    <div class="form-group">
-      <%= form.text_area :content, rows: 3, class: "form-control", placeholder: "Write your message here...", required: true, data: {"reset-input-target": "input"}%>
+<div class="message-input mb-3">
+  <%= form_with model: @message, url: create_message_path(@interlocutor), data: {
+        turbo: use_turbo,
+        turbo_stream: use_turbo,
+        controller: "reset-input",
+        action: "turbo:submit-end->reset-input#clear"
+      } do |form| %>
+
+    <div class="form-group mb-2">
+      <%= form.text_area :content,
+          rows: 1,
+          class: "form-control",
+          placeholder: "Write your message...",
+          required: true,
+          data: { "reset-input-target": "input" } %>
     </div>
-    <div class="form-group">
-      <%= form.submit "Send", class: "btn btn-primary", data: {action: "submit->reset-input#clear"} %>
+
+    <div class="form-group d-flex justify-content-end">
+      <%= form.button type: "submit",
+            class: "btn btn-primary d-flex align-items-center justify-content-center px-3 py-2",
+            data: { action: "submit->reset-input#clear" } do %>
+        <i class="fa-solid fa-paper-plane"></i>
+      <% end %>
     </div>
+
   <% end %>
 </div>
