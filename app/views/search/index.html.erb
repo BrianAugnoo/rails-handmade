@@ -1,7 +1,7 @@
-<div class="chat-search-bar">
-  <%= form_with url: search_results_path do |f| %>
-    <%= f.search_field :query %>
-    <%= f.submit %>
+<div class="chat-search-bar mb-3">
+  <%= form_with url: search_results_path, local: true, class: "d-flex" do |f| %>
+    <%= f.search_field :query, class: "form-control me-2", placeholder: "Search…" %>
+    <%= f.submit "Search", class: "btn btn-primary" %>
   <% end %>
 </div>
 

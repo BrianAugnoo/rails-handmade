@@ -1,29 +1,26 @@
 <div id="results" data-controller="search">
-  <div>
-    <%= link_to "users", "#", data: {action: "click->search#showUsers"}%>
-    <%= link_to "artworks", "#", data: {action: "click->search#showArts"} %>
-  </div>
-
   <div id="users" data-search-target="users">
     <% users.each do |user| %>
-      <div class="d-flex">
-        <% if user.avatar.attached? %>
-          <%= cl_image_tag user.avatar.key,
-              class: "rounded-circle me-3 flex-shrink-0",
-              width: "60", height: "60"
-          %>
-        <% else %>
-          <img src="<%= asset_path('default-avatar.jpg') %>"
-              class="rounded-circle me-3 flex-shrink-0"
-              width="60" height="60"
-              alt="Avatar">
-        <% end %>
+      <%= link_to profile_path(user), class: "text-decoration-none text-dark" do %>
+        <div class="bg-white rounded-4 shadow-sm p-3 mb-3 d-flex align-items-center">
+          <% if user.avatar.attached? %>
+            <%= cl_image_tag user.avatar.key,
+                class: "rounded-circle me-3 flex-shrink-0",
+                width: "60", height: "60"
+            %>
+          <% else %>
+            <img src="<%= asset_path('default-avatar.jpg') %>"
+                class="rounded-circle me-3 flex-shrink-0"
+                width="60" height="60"
+                alt="Avatar">
+          <% end %>
 
-        <div>
-          <p class="fw-semibold mb-2 small"><%= user.user_name %></p>
-          <p class="text-muted mb-0">Followers: <%= user.subscribers.count %></p>
+          <div>
+            <p class="fw-semibold mb-2 small mb-0"><%= user.user_name %></p>
+            <p class="text-muted mb-0">Followers: <%= user.subscribers.count %></p>
+          </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 
