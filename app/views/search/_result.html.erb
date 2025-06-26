@@ -1,4 +1,8 @@
 <div id="results" data-controller="search">
+  <div class="d-flex justify-content-center gap-2 mt-3">
+    <%= link_to "users", "#", class: "btn btn-outline-primary px-3 py-1 fw-semibold", data: { action: "click->search#showUsers" } %>
+    <%= link_to "artworks", "#", class: "btn btn-outline-primary px-3 py-1 fw-semibold", data: { action: "click->search#showArts" } %>
+  </div>
   <div id="users" data-search-target="users">
     <% users.each do |user| %>
       <%= link_to profile_path(user), class: "text-decoration-none text-dark" do %>
