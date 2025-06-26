@@ -17,6 +17,7 @@ class ProfileController < ApplicationController
       flash[:notice] = "Profile updated successfully."
       redirect_to profile_path(current_user)
     else
+      raise current_user.errors.full_messages.to_sentence
       flash[:alert] = "Failed to update profile."
       render :edit
     end
@@ -28,6 +29,8 @@ class ProfileController < ApplicationController
 
   private
   def set_params
-    params.require(:user).permit(:user_name, :phone_number, :avatar)
+    profile_params = params.require(:user).permit(:user_name, :phone_number, :avatar)
+    profile_params[:user_name] = current_user.user_name if profile_params[:user_name] === ""
+    profile_params
   end
 end
