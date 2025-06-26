@@ -10,11 +10,17 @@
 
   <div class="p-3" data-anchor-target="<%= art == @last ? "anchor" : ""%>">
 
-    <% if art.photo.attached? %>
-      <%= cl_image_tag art.photo.key, class: "w-full rounded mb-2 img-fluid object-fit-contain", alt: "Additional content image", width: 310, height: 200 %>
-    <% else %>
-      <%= image_tag "artworkexample.jpg", class: "w-full rounded mb-2", alt: "Additional content image", width: 310, height: 200 %>
-    <% end %>
+    <div class="position-relative d-inline-block">
+     <% if art.user == current_user %>
+       <i class="fa-solid fa-ellipsis-vertical position-absolute top-0 end-0 m-2 text-white"></i>
+     <% end %>
+
+      <% if art.photo.attached? %>
+        <%= cl_image_tag art.photo.key, class: "w-full rounded mb-2 img-fluid object-fit-contain", alt: "Additional content image", width: 310, height: 200 %>
+      <% else %>
+        <%= image_tag "artworkexample.jpg", class: "w-full rounded mb-2", alt: "Additional content image", width: 310, height: 200 %>
+      <% end %>
+    </div>
 
     <% if art.video.attached? %>
       <%= cl_video_tag art.video.key, controls: true, class: "w-full" %>
