@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
       respond_to do |format|
         format.turbo_stream do
           position = @message.user == current_user ? "ms-auto" : ""
-          render turbo_stream: turbo_stream.append("messages", partial: "conversations/message", locals: { message: Message.last, position: position })
+          render turbo_stream: turbo_stream.append("messages", partial: "conversations/message", locals: { message: @message, position: position, last: @message })
         end
         format.html { redirect_to conversation_path(@message.conversation) }
       end
