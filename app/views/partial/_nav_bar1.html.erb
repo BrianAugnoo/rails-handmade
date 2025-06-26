@@ -2,11 +2,12 @@
   <div class="d-flex justify-content-between align-items-center px-4 py-2 border-bottom bg-light">
     <strong class="fs-5">handmade</strong>
     <div class="d-flex">
-      <%= link_to notifications_path, class: "btn btn-outline-primary me-2 btn-sm rounded-pill d-flex align-items-center" do %>
-        <i class="fa-solid fa-bell me-1"></i> Notifications
+      <%= link_to notifications_path, class: "btn btn-outline-primary me-2 btn-sm rounded-pill d-flex justify-content-center align-items-center", style: "width: 36px; height: 36px;" do %>
+        <i class="fa-solid fa-bell"></i>
       <% end %>
-      <%= link_to conversations_path, class: "btn btn-primary btn-sm rounded-pill d-flex align-items-center" do %>
-        <i class="fa-solid fa-message me-1"></i> Messages
+
+      <%= link_to conversations_path, class: "btn btn-primary btn-sm rounded-pill d-flex justify-content-center align-items-center", style: "width: 36px; height: 36px;" do %>
+        <i class="fa-solid fa-message"></i>
       <% end %>
     </div>
   </div>
@@ -19,29 +20,25 @@
 
     <%= link_to root_path, class: "nav-item flex-fill text-decoration-none #{'active text-primary' if current_page?(root_path)}" do %>
       <div class="d-flex flex-column align-items-center py-1">
-        <i class="fa-solid fa-house fa-lg mb-1"></i>
-        <span>Home</span>
+        <i class="fa-solid fa-house fa-xl mb-1"></i>
       </div>
     <% end %>
 
     <%= link_to search_path, class: "nav-item flex-fill text-decoration-none #{'active text-primary' if current_page?(search_path)}" do %>
       <div class="d-flex flex-column align-items-center py-1">
-        <i class="fa-solid fa-magnifying-glass fa-lg mb-1"></i>
-        <span>Search</span>
+        <i class="fa-solid fa-magnifying-glass fa-xl mb-1"></i>
       </div>
     <% end %>
 
     <%= link_to new_art_path, class: "nav-item flex-fill text-decoration-none #{'active text-primary' if current_page?(new_art_path)}" do %>
       <div class="d-flex flex-column align-items-center py-1">
-        <i class="fa-solid fa-upload fa-lg mb-1"></i>
-        <span>Upload</span>
+        <i class="fa-solid fa-upload fa-xl mb-1"></i>
       </div>
     <% end %>
 
     <%= link_to profile_path(current_user), class: "nav-item flex-fill text-decoration-none #{'active text-primary' if current_page?(profile_path(current_user))}" do %>
       <div class="d-flex flex-column align-items-center py-1">
-        <i class="fa-solid fa-user fa-lg mb-1"></i>
-        <span>Profile</span>
+        <i class="fa-solid fa-user fa-xl mb-1"></i>
       </div>
     <% end %>
 
