@@ -4,9 +4,17 @@
     <title><%= content_for(:title) || "Rails Handmade" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#007bff">
-    <link rel="manifest" href="<%= url_for(controller: 'home', action: 'manifest', format: :json) %>">
+    <link rel="manifest" href="/manifest.json">
+
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Handmade">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="<%= asset_path '/handmade_logo.png' %>">
+    <link rel="apple-touch-icon" sizes="152x152" href="<%= asset_path '/handmade_logo.png' %>">
+    <link rel="apple-touch-icon" sizes="120x120" href="<%= asset_path '/handmade_logo.png' %>">
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>

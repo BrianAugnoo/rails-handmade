@@ -3,8 +3,8 @@
 
   <div class="d-flex align-items-center ms-3 mt-3 mb-2">
     <%= link_to profile_path(art.user), style: "text-decoration: none; color: black;" do %>
-      <% if current_user.avatar.attached? %>
-        <%= cl_image_tag current_user.avatar.key,
+      <% if art.user.avatar.attached? %>
+        <%= cl_image_tag art.user.avatar.key,
           class: "rounded-circle me-3 flex-shrink-0",
           width: "40", height: "40"
         %>

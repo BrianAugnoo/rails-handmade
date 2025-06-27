@@ -45,7 +45,13 @@
 <div class="arts-cards mb-5 mt-4">
   <% @user.arts.each do |art| %>
     <%= link_to feed_path(data: art.id) do %>
-      <%= image_tag "artworkexample.jpg", class: "w-full rounded mb-2", alt: "Additional content image", width: 100, height: 100 %>
+      <div style="width: 100px; height: 100px;">
+        <% if art.photo.attached? %>
+              <%= cl_image_tag art.photo.key, class: "w-full  mb-2 img-fluid object-fit-contain w-100 h-100", alt: "Additional content image", style:"object-fit: cover;" %>
+          <% else %>
+            <%= image_tag "artworkexample.jpg", class: "w-full  mb-2 w-100 h-100", alt: "Additional content image", style:"object-fit: cover;" %>
+          <% end %>
+      </div>
     <% end %>
   <% end %>
 </div>

@@ -15,10 +15,8 @@ class User < ApplicationRecord
   has_many :conversation_as_senders, class_name: "Conversation", foreign_key: "sender_id", dependent: :destroy
   has_many :messages, dependent: :destroy
 
-  validates :user_name, presence: true, uniqueness: true
   validate :normalize_phone_number
   validate :valid_phone_number
-  validates :phone_number, uniqueness: true, if: :valid_phone_number
 
   has_one_attached :avatar
 

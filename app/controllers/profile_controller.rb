@@ -4,7 +4,7 @@ class ProfileController < ApplicationController
   end
 
   def feed
-    @arts = User.find(params[:user_id]).arts
+    @arts = User.find(params[:user_id]).order(created_at: :desc).arts
     @last = Art.find(params[:data])
   end
 

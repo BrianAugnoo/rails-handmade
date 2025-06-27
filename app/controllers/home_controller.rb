@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @arts = Art.all
+    @arts = Art.order(created_at: :desc)
   end
 end
