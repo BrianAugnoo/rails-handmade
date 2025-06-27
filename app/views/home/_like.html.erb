@@ -1,12 +1,12 @@
-
 <% liked = Like.liked?(current_user, art) %>
-<% color = liked ? "btn-primary" : "" %>
-<%=
-button_to(
-!liked ? art_likes_path(art) : destroy_like_path(art),
-class: "hover:underline me-2 btn #{color}",
-method: liked ? :delete : :post,
-data: {turbo: true}) do
-%>
-<span>👍 <%= art.likes.size %></span>
+<% color = liked ? "text-danger" : "" %>
+
+<%= button_to(
+  !liked ? art_likes_path(art) : destroy_like_path(art),
+  class: "btn bg-transparent border-0 d-flex align-items-center",
+  method: liked ? :delete : :post,
+  data: { turbo: true }) do %>
+
+  <i class="fa fa-heart fa-lg me-1 <%= color %>"></i>
+  <%= art.likes.size %>
 <% end %>
