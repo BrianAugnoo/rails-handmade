@@ -1,29 +1,38 @@
-<!-- Aligned Form Container -->
-<div class="container px-0"> <!-- Match this with the navbar padding -->
-  <%= form_with model: User.new, url: update_profile_path(@user), local: true, class: "p-4 rounded shadow-sm bg-light" do |f| %>
+<%= render "partial/back_button" %>
 
-    <div class="mb-3" style="max-width: 350px;">
-      <%= f.label :user_name, "New user_name", class: "form-label small fw-semibold text-muted" %>
-      <%= f.text_field :user_name, class: "form-control form-control-sm px-3", placeholder: "ex: AuBrian" %>
-    </div>
+<!-- Main Container -->
+<div class="container px-2 py-4">
+  <div class="bg-white shadow-sm rounded-4 p-3">
+    <h5 class="text-center text-primary mb-4">Edit Your Profile</h5>
 
-    <div class="mb-3" style="max-width: 350px;">
-      <%= f.label :avatar, "Image Profile", class: "form-label small fw-semibold text-muted" %>
-      <%= f.file_field :avatar, accept: "image/*", class: "form-control form-control-sm px-3" %>
-    </div>
+    <%= form_with model: User.new, url: update_profile_path(@user), local: true do |f| %>
 
-    <div class="mb-3" style="max-width: 350px;">
-      <label for="phone_number" class="form-label small fw-semibold text-muted d-block mb-1">Phone number</label>
-      <input type="tel" id="phone_number" name="user[phone_number]" class="form-control form-control-sm ps-6" placeholder="Phone number" style="width: 143%;">
-    </div>
+      <!-- Username -->
+      <div class="mb-3">
+        <%= f.label :user_name, "New Username", class: "form-label small fw-semibold" %>
+        <%= f.text_field :user_name, class: "form-control form-control-sm", placeholder: "ex: AuBrian" %>
+      </div>
 
-    <div class="d-grid mt-4" style="max-width: 350px;">
-      <%= f.submit "Save", class: "btn btn-primary btn-sm shadow-sm" %>
-    </div>
+      <!-- Avatar Upload -->
+      <div class="mb-3">
+        <%= f.label :avatar, "Profile Image", class: "form-label small fw-semibold" %>
+        <%= f.file_field :avatar, accept: "image/*", class: "form-control form-control-sm" %>
+      </div>
 
-  <% end %>
+      <!-- Phone Number -->
+      <div class="mb-3">
+        <label for="phone_number" class="form-label small fw-semibold d-block mb-1">Phone Number</label>
+        <input type="tel" id="phone_number" name="user[phone_number]" class="form-control form-control-sm" placeholder="Phone number">
+      </div>
+
+      <!-- Submit Button -->
+      <div class="d-grid">
+        <%= f.submit "Save", class: "btn btn-primary btn-sm" %>
+      </div>
+
+    <% end %>
+  </div>
 </div>
-
 <!-- intl-tel-input CSS (optional for better styling) -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@17/build/css/intlTelInput.min.css">
 

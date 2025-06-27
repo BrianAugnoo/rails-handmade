@@ -1,5 +1,7 @@
-<div data-controller="anchor">
-  <% @arts.each do |art| %>
-    <%= render "art/art", art: art, current_user: current_user, last: @last %>
-  <% end %>
+<div data-controller="anchor" class="overflow-auto px-3 py-2" style="max-height: 100vh;">
+  <div class="d-flex flex-column gap-3">
+    <% @arts.each do |art| %>
+      <%= render "art/art", art: art, current_user: current_user, last: @last %>
+    <% end %>
+  </div>
 </div>
