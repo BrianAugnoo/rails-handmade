@@ -31,10 +31,11 @@
         <%= render "partial/nav_bar1" %>
       <% end %>
 
-
+      <% flash[:alert] = "AI-generated content detected with a confidence of 98.88%. Please upload original content." %>
       <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key == "notice" ? "success" : "danger" %>">
+        <div class="alert alert-<%= key == "notice" ? "success" : "danger" %> d-flex" data-controller="close" data-close-target="alert">
           <%= value %>
+          <i class="fa-solid fa-xmark" style="cursor: pointer;" data-action="click->close#destroy"></i>
         </div>
       <% end %>
 

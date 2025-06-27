@@ -11,8 +11,8 @@ class ArtController < ApplicationController
     @ia_verification = ia_verification
     if @ia_verification[:succes]
       if @ia_verification[:ai_detected]
-        flash[:alert] = "AI-generated content detected with a confidence of #{@ia_verification[:ai_confidence]}%. Please upload original content."
-        render :new
+        flash[:alert] = "AI-generated content detected with a AI confidence of #{@ia_verification[:ai_confidence]}%. Please upload original content."
+        redirect_to new_art_path
       else
         @art.trust = 100.00 - @ia_verification[:ai_confidence]
         if @art.save
@@ -20,12 +20,12 @@ class ArtController < ApplicationController
           redirect_to root_path
         else
           flash[:alert] = "Failed to create art. Please check the errors."
-          render :new
+          redirect_to new_art_path
         end
       end
     else
       flash[:alert] = @ia_verification[:error]
-      render :new
+      redirect_to new_art_path
     end
   end
 
