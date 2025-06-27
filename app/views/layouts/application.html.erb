@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#007bff">
+    <link rel="manifest" href="<%= url_for(controller: 'home', action: 'manifest', format: :json) %>">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -31,7 +34,6 @@
         <%= render "partial/nav_bar1" %>
       <% end %>
 
-      <% flash[:alert] = "AI-generated content detected with a confidence of 98.88%. Please upload original content." %>
       <% flash.each do |key, value| %>
         <div class="alert alert-<%= key == "notice" ? "success" : "danger" %> d-flex" data-controller="close" data-close-target="alert">
           <%= value %>
