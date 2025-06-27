@@ -1,7 +1,7 @@
 
-<div class="border rounded-4 overflow-hidden mb-4 bg-white" id="<%= "art_#{art.id}" %>" data-controller="animation">
+<div class="border  overflow-hidden mt-1 bg-white" id="<%= "art_#{art.id}" %>" data-controller="animation">
 
-  <div class="d-flex align-items-center ms-3 mt-3">
+  <div class="d-flex align-items-center ms-3 mt-3 mb-2">
     <%= link_to profile_path(art.user), style: "text-decoration: none; color: black;" do %>
       <% if current_user.avatar.attached? %>
         <%= cl_image_tag current_user.avatar.key,
@@ -18,7 +18,7 @@
     <% end %>
   </div>
 
-  <div class="p-3" data-anchor-target="<%= art == @last ? "anchor" : ""%>">
+  <div class="" data-anchor-target="<%= art == @last ? "anchor" : ""%>">
 
    <div class="position-relative d-inline-block">
       <% if art.user == current_user %>
@@ -37,22 +37,22 @@
       <div class="d-flex">
         <% if art.photo.attached? %>
           <a href="art/<%= art.id%>">
-            <%= cl_image_tag art.photo.key, class: "w-full rounded mb-2 img-fluid object-fit-contain", alt: "Additional content image", width: 250, height: 200 %>
+            <%= cl_image_tag art.photo.key, class: "w-full  mb-2 img-fluid object-fit-contain", alt: "Additional content image", style: "width: 100vw;", height: 250 %>
           </a>
         <% else %>
-          <%= image_tag "artworkexample.jpg", class: "w-full rounded mb-2", alt: "Additional content image", width: 250, height: 200 %>
+          <%= image_tag "artworkexample.jpg", class: "w-full  mb-2", alt: "Additional content image", style: "width: 100vw;", height: 250 %>
         <% end %>
 
       </div>
     </div>
 
-    <p class="text-xs text-gray-500 mb-2">
+    <p class="text-xs text-gray-500 mb-2 ms-3">
       <%= art.created_at.strftime("%b %d, %Y") %>
     </p>
-    <p class="text-sm mb-3"><%= art.description %></p>
+    <p class="text-sm mb-3 ms-3"><%= art.description %></p>
 
 
-    <div class="d-flex space-x-4 text-sm">
+    <div class="d-flex space-x-4 text-sm mb-2">
       <%= turbo_stream_from "turbo_#{art.id}_likes" %>
       <div id="<%= "art_#{art.id}_likes" %>" >
         <%= render "home/like", current_user: current_user, art: art %>
