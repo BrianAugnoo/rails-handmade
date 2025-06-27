@@ -1,11 +1,5 @@
 
-<div class="max-w-md mx-auto p-4 space-y-6">
-
-  <div class="text-right">
-    <%= link_to "Publish", new_art_path(Art.new),
-                class: "bg-blue-500 text-white px-3 py-1 rounded" %>
-  </div>
-
+<div class="max-w-md mx-auto  space-y-6 mb-6">
   <% @arts.each do |art| %>
     <%= render "art/art", art: art %>
   <% end %>
