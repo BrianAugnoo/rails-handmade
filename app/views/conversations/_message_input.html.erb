@@ -1,5 +1,5 @@
-<div class="message-input mb-3">
-  <%= form_with model: @message, url: create_message_path(@interlocutor), data: {
+<div class="mb-5">
+  <%= form_with model: @message, url: create_message_path(@interlocutor), class: "d-flex align-items-center gap-2 mb-0", data: {
         turbo: use_turbo,
         turbo_stream: use_turbo,
         controller: "reset-input",

@@ -1,5 +1,15 @@
 <div class="chat-avatar" id="conversation-<%= interlocutor.id %>">
-  <img class="avatar-img" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
+  <% if interlocutor.avatar.attached? %>
+    <%= cl_image_tag interlocutor.avatar.key,
+          class: "rounded-circle me-3 flex-shrink-0",
+         width: "60", height: "60"
+    %>
+  <% else %>
+    <img src="<%= asset_path('default-avatar.jpg') %>"
+         class="rounded-circle me-3 flex-shrink-0"
+         width="60" height="60"
+        alt="Avatar">
+  <% end %>
   <% if interlocutor.connected === true %>
     <%= render "session/online_icon", user: interlocutor %>
   <% end %>
