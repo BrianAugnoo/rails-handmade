@@ -29,6 +29,10 @@ class ArtController < ApplicationController
     end
   end
 
+  def show
+    @art = Art.find(params[:id])
+  end
+
   private
   def set_params
     params.require(:art).permit(:description, :photo, :video, :tags)

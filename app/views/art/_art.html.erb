@@ -1,24 +1,50 @@
-<div class="d-flex align-items-center mb-2">
-  <%= link_to profile_path(art.user) do %>
-    <%= image_tag "default_avatar.png", alt: "User Avatar", class: "rounded-circle me-2", width: 40, height: 40 %>
-    <span class="fw-bold"><%= art.user.user_name %></span>
-  <% end %>
-</div>
 
+<div class="border rounded-4 overflow-hidden mb-4 bg-white" id="<%= "art_#{art.id}" %>" data-controller="animation">
 
-<div class="border rounded-4 overflow-hidden mb-4" id="<%= "art_#{art.id}" %>">
+  <div class="d-flex align-items-center ms-3 mt-3">
+    <%= link_to profile_path(art.user), style: "text-decoration: none; color: black;" do %>
+      <% if current_user.avatar.attached? %>
+        <%= cl_image_tag current_user.avatar.key,
+          class: "rounded-circle me-3 flex-shrink-0",
+          width: "40", height: "40"
+        %>
+      <% else %>
+        <img src="<%= asset_path('default-avatar.jpg') %>"
+            class="rounded-circle me-3 flex-shrink-0"
+            width="40" height="40"
+            alt="Avatar">
+      <% end %>
+      <span class="fw-bold"><%= art.user.user_name %></span>
+    <% end %>
+  </div>
 
   <div class="p-3" data-anchor-target="<%= art == @last ? "anchor" : ""%>">
 
-    <% if art.photo.attached? %>
-      <%= cl_image_tag art.photo.key, class: "w-full rounded mb-2 img-fluid object-fit-contain", alt: "Additional content image", width: 310, height: 200 %>
-    <% else %>
-      <%= image_tag "artworkexample.jpg", class: "w-full rounded mb-2", alt: "Additional content image", width: 310, height: 200 %>
-    <% end %>
+   <div class="position-relative d-inline-block">
+      <% if art.user == current_user %>
+        <i class="fa-solid fa-ellipsis-vertical position-absolute top-0 end-0 m-2 text-white dropdown-toggle" style="cursor: pointer; color: black;" data-action="click->animation#dropdown"></i>
 
-    <% if art.video.attached? %>
-      <%= cl_video_tag art.video.key, controls: true, class: "w-full" %>
-    <% end %>
+        <div class="dropdown-menu-custom position-absolute top-0 end-0 mt-4 me-2 p-2 bg-white rounded shadow z-3"
+             style="min-width: 100px; background-color: transparent;"
+             data-animation-target="dropItem"
+             hidden
+        >
+          <%= button_to "edit", edit_art_path(art), method: :post, class: "btn btn-outline-secondary w-100 fw-semibold" %>
+          <%= button_to "delete", art_path(art), method: :delete, class: "btn btn-outline-danger w-100 fw-semibold", data: { turbo: true , "data-confirm": "are you sure?"} %>
+        </div>
+      <% end %>
+
+      <div class="d-flex">
+        <% if art.photo.attached? %>
+          <a href="art/<%= art.id%>">
+            <%= cl_image_tag art.photo.key, class: "w-full rounded mb-2 img-fluid object-fit-contain", alt: "Additional content image", width: 250, height: 200 %>
+          </a>
+        <% else %>
+          <%= image_tag "artworkexample.jpg", class: "w-full rounded mb-2", alt: "Additional content image", width: 250, height: 200 %>
+        <% end %>
+
+      </div>
+    </div>
 
     <p class="text-xs text-gray-500 mb-2">
       <%= art.created_at.strftime("%b %d, %Y") %>

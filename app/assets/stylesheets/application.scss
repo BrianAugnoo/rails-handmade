@@ -2,10 +2,12 @@
 @import "conversations";
 @import "searchbarConversations";
 @import "profile";
+@import "art";
 
 html, body {
   height: 100%;
   margin: 0;
+  background-color: #F2F4F7;
 }
 
 body.no-scroll {
@@ -15,7 +17,7 @@ body.no-scroll {
 }
 
 .scrollable {
-  flex: 1 1 auto;        
+  flex: 1 1 auto;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }

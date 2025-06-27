@@ -12,7 +12,7 @@
     <div id="messages" class="messages d-flex w-100 flex-column big-margin" data-controller="anchor">
       <% @conversation.messages.each do |message| %>
         <% position = current_user == message.user ? "ms-auto" : "" %>
-        <%= render "message", message: message, position: position, last: @conversation.messages.last %>
+        <%= render "message", message: message, position: position, last_message: @conversation.messages.last %>
       <% end %>
     </div>
   </div>
