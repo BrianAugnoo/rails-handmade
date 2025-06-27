@@ -1,16 +1,30 @@
 <div id="notification_<%= notification.id %>" class="notification <%= notification.read? ? 'read' : 'unread' %>">
-  <div class="mb-2 p-2 border rounded">
+  <div class="mb-3 p-3 border rounded shadow-sm bg-white">
+
+    <!-- Date -->
+    <div class="mb-2 small text-muted">
+      <%= notification.created_at.strftime("%b %d, %Y") %>
+    </div>
+
+    <!-- Avatar + Message -->
     <div class="d-flex align-items-center">
-      <div class="me-2 d-flex align-items-center">
-        <img src="<%= asset_path('default-avatar.jpg') %>" class="rounded-circle" width="40" height="40" />
+
+      <!-- Profile Image -->
+      <div class="me-3">
+        <% if notification.user.avatar.attached? %>
+          <%= image_tag url_for(notification.user.avatar), class: "rounded-circle", width: 48, height: 48 %>
+        <% else %>
+          <%= image_tag "default-avatar.jpg", class: "rounded-circle", width: 48, height: 48 %>
+        <% end %>
       </div>
-      <div class="flex-grow-1">
-        <span class="notification-date">
-          <span><%= notification.created_at.strftime("%B %d, %Y") %></span>
-          <span style="margin-left: 130px;"><%= notification.user.user_name %></span>
-        </span>
-        <p class="mb-0"><%= notification.content %></p>
+
+      <!-- Message -->
+      <div>
+        <p class="mb-0 text-dark small">
+          You got a message from <span class="text-primary fw-semibold"><%= notification.user.user_name.titleize %></span>
+        </p>
       </div>
+
     </div>
   </div>
 </div>
