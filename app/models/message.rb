@@ -22,10 +22,6 @@ class Message < ApplicationRecord
 
   private
   def broadcast_create
-    broadcast_append_to "conversation_#{self.conversation.id}_#{self.user.id}",
-                         target: "messages",
-                         partial: "conversations/message",
-                         locals: { message: self, position: "ms-auto" }
 
     broadcast_append_to "conversation_#{self.conversation.id}_#{self.recipient.id}",
                          target: "messages",
