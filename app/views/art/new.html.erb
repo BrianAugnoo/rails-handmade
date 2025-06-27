@@ -5,6 +5,12 @@
   <div class="bg-white shadow-sm rounded-4 p-3">
     <h5 class="text-center text-primary mb-4">Publish Your New Art</h5>
 
+
+    <!-- Notice d'information -->
+    <div class="alert alert-info text-center small mt-4" role="alert">
+      Upon upload, we will process the image to see if it is AI-generated or not.
+    </div>
+
     <%= form_with model: @art, url: art_index_path(@art), local: true do |f| %>
 
       <!-- Tags -->
@@ -37,10 +43,5 @@
       </div>
 
     <% end %>
-  </div>
-
-  <!-- Notice d'information -->
-  <div class="alert alert-info text-center small mt-4" role="alert">
-    Upon upload, we will process the image to see if it is AI-generated or not.
   </div>
 </div>
