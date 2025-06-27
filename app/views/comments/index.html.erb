@@ -1,20 +1,32 @@
 <%= turbo_stream_from "turbo_comments_#{@art.id}" %>
-<div id="comments_<%= @art.id %>">
-  <% @comments.each do |comment|%>
-    <%= render "comment", comment: comment %>
-  <% end %>
-</div>
 
-<div class="position-fixed bottom-0 start-0 end-0 bg-white p-3">
-  <div class="message-input">
-    <%= form_with model: [@art, Comment.new], data: {turbo: true, turbo_stream: true, controller: "reset-input", action: "turbo:submit-end->reset-input#clear"}  do |form| %>
-      <div class="form-group">
-        <%= form.label :review, "Type your comment:" %>
-        <%= form.text_area :review, rows: 3, class: "form-control", placeholder: "Write your message here...", required: true, data: {"reset-input-target": "input"}%>
-      </div>
-      <div class="form-group">
-        <%= form.submit "Send", class: "btn btn-primary", data: {action: "submit->reset-input#clear"} %>
-      </div>
+<div class="container-fluid px-3" style="padding-top: 16px; padding-bottom: 128px; overflow-y: auto;">
+  <div id="comments_<%= @art.id %>" class="d-flex flex-column gap-3">
+    <% @comments.each do |comment| %>
+      <%= render "comment", comment: comment %>
     <% end %>
   </div>
 </div>
+
+<div class="position-fixed start-0 end-0 bg-white border-top px-3 py-2" style="bottom: 64px; z-index: 1030;">
+  <%= form_with model: [@art, Comment.new], data: {
+        turbo: true,
+        turbo_stream: true
+      }, class: "d-flex align-items-center gap-2 mb-0" do |form| %>
+
+    <%= form.text_area :review,
+          rows: 1,
+          class: "form-control",
+          placeholder: "Write your comment here...",
+          required: true %>
+
+    <%= form.button type: "submit",
+          class: "btn btn-primary d-flex align-items-center justify-content-center px-3 py-2" do %>
+      <i class="fa-solid fa-paper-plane"></i>
+    <% end %>
+
+  <% end %>
+</div>
+
+
+<div style="height: 128px;"></div>
