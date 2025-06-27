@@ -1,0 +1,29 @@
+<div id="artCarousel" class="carousel slide carou">
+  <div class="carousel-inner">
+
+    <% if @art.photo.attached? %>
+      <div class="carousel-item active">
+        <%= cl_image_tag @art.photo.key,
+              class: "d-block w-100 rounded mb-2 img-fluid object-fit-contain",
+              alt: "Additional content image" %>
+      </div>
+    <% end %>
+
+    <% if @art.video.attached? %>
+      <div class="carousel-item <%= @art.photo.attached? ? "" : "active" %>">
+        <%= cl_video_tag @art.video.key,
+              controls: true,
+              class: "d-block w-100 rounded" %>
+      </div>
+    <% end %>
+
+  </div>
+
+
+  <button class="carousel-control-prev carou-btn" type="button" data-bs-target="#artCarousel" data-bs-slide="prev" style="height: 50px;">
+    <span class="fa-solid fa-arrow-left fa-2xl text-dark"></span>
+  </button>
+  <button class="carousel-control-next carou-btn" type="button" data-bs-target="#artCarousel" data-bs-slide="next" style="height: 50px;">
+    <span class="fa-solid fa-arrow-right fa-2xl text-dark"></span>
+  </button>
+</div>
